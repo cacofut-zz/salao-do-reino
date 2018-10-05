@@ -17,13 +17,8 @@ import javax.persistence.Id;
  * @author cristiano
  */
 @Entity
-public class Estado implements Serializable{
+public class Estado extends BaseEntity{
 
-    private static final long serialVersionUID = 1L;        
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String nome;
     private String sigla;
 
@@ -31,23 +26,15 @@ public class Estado implements Serializable{
     
     }
 
+    public Estado(Long id, String nome, String sigla) {
+        super(id);
+        this.nome = nome;
+        this.sigla = sigla;
+    }
+        
     public Estado(String nome, String sigla) {
         this.nome = nome;
         this.sigla = sigla;
-    }
-
-    public Estado(Long id, String nome, String sigla) {
-        this.id = id;
-        this.nome = nome;
-        this.sigla = sigla;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNome() {
@@ -66,37 +53,7 @@ public class Estado implements Serializable{
         this.sigla = sigla;
     }
 
-    @Override
-    public String toString() {
-        return "Estado{" + "id=" + id + ", nome=" + nome + ", sigla=" + sigla + '}';
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.id);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Estado other = (Estado) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
-    }
-    
-    
+   
     
     
 }
