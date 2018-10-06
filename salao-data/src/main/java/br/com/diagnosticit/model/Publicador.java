@@ -22,6 +22,9 @@ public class Publicador extends BaseEntity{
     private Pessoa pessoa;
     
     @ManyToOne
+    private Congregacao congregacao;
+    
+    @ManyToOne
     private Grupo grupo;
 
     public String getPublicador() {

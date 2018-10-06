@@ -7,6 +7,7 @@ package br.com.diagnosticit.model;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -14,13 +15,14 @@ import javax.persistence.Entity;
  */
 @Entity
 public class Endereco extends BaseEntity {
-
-    private static final long serialVersionUID = 1L;
     
     private String rua;
     private String numero;
     private String cep;
     private String complemento;
+    
+    @ManyToOne
+    private Bairro bairro;
 
     public String getRua() {
         return rua;
@@ -54,7 +56,15 @@ public class Endereco extends BaseEntity {
         this.complemento = complemento;
     }
 
+    public Bairro getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(Bairro bairro) {
+        this.bairro = bairro;
+    }
     
-    
-    
+     
+
+   
 }

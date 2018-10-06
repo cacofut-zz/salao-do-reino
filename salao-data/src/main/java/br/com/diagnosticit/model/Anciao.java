@@ -6,6 +6,7 @@
 package br.com.diagnosticit.model;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 /**
@@ -19,6 +20,9 @@ public class Anciao extends BaseEntity{
     
     @OneToOne
     private Pessoa pessoa;
+    
+    @ManyToOne
+    Congregacao congregacao;
 
     public String getAnciao() {
         return anciao;
