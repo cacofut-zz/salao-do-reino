@@ -14,18 +14,14 @@ import javax.persistence.OneToOne;
  * @author cristiano
  */
 @Entity
-public class Publicador extends BaseEntity{
+public class Publicador extends Pessoa{
     
     private String publicador;
-    
-    @OneToOne
-    private Pessoa pessoa;
-    
-    @ManyToOne
-    private Congregacao congregacao;
-    
+        
     @ManyToOne
     private Grupo grupo;
+
+  
 
     public String getPublicador() {
         return publicador;

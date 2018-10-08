@@ -5,6 +5,7 @@
  */
 package br.com.diagnosticit.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -17,16 +18,34 @@ import javax.persistence.OneToOne;
 @Entity
 public class Congregacao extends BaseEntity{
     
-    @OneToOne
-    private Endereco enderco;
+    private String nome;
     
-    @OneToMany(mappedBy = "congregacao")
-    private List<Anciao> anciaos;
-    
-    @OneToMany(mappedBy = "congregacao")
-    private List<Publicador> publicadores;
-    
-    @OneToMany(mappedBy = "congregacao")
-    private List<ServoMinisterial> servosMinisteriais;
+    public Congregacao() {
+        this("Default");
+    }
+
+    public Congregacao(String nome) {
+        this.nome = nome;
+    }
+
+    public Congregacao(String nome, Long id) {
+        super(id);
+        this.nome = nome;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }                
+
+    @Override
+    public String toString() {
+        return "Congregacao{" + "nome=" + nome + '}';
+    }
+
+                    
     
 }

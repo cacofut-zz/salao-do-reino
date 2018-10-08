@@ -14,16 +14,12 @@ import javax.persistence.OneToOne;
  * @author cristiano
  */
 @Entity
-public class ServoMinisterial extends BaseEntity{
+public class ServoMinisterial extends Pessoa{
     
     private String servoMinisterial;
-    
-    @OneToOne
-    private Pessoa pessoa;
-    
-    @ManyToOne
-    private Congregacao congregacao;
 
+
+    
     public String getServoMinisterial() {
         return servoMinisterial;
     }

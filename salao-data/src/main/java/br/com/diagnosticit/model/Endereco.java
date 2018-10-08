@@ -16,21 +16,44 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Endereco extends BaseEntity {
     
-    private String rua;
+    private String logradouro;
     private String numero;
     private String cep;
     private String complemento;
     
     @ManyToOne
+    private Pessoa pessoa;
+    
+    @ManyToOne
     private Bairro bairro;
 
-    public String getRua() {
-        return rua;
+    public Endereco() {
     }
 
-    public void setRua(String rua) {
-        this.rua = rua;
+    public Endereco(String logradouro, String numero, String cep, String complemento, Bairro bairro) {
+        this.logradouro = logradouro;
+        this.numero = numero;
+        this.cep = cep;
+        this.complemento = complemento;
+        this.bairro = bairro;
     }
+
+    public Endereco(String logradouro, String numero, String cep, String complemento, Bairro bairro, Long id) {
+        super(id);
+        this.logradouro = logradouro;
+        this.numero = numero;
+        this.cep = cep;
+        this.complemento = complemento;
+        this.bairro = bairro;
+    }
+
+    public String getLogradouro() {
+        return logradouro;
+    }
+
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }    
 
     public String getNumero() {
         return numero;
@@ -63,8 +86,16 @@ public class Endereco extends BaseEntity {
     public void setBairro(Bairro bairro) {
         this.bairro = bairro;
     }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
     
      
-
+    
    
 }
