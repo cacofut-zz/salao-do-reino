@@ -5,6 +5,7 @@
  */
 package br.com.diagnosticit.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -13,22 +14,55 @@ import javax.persistence.OneToOne;
  *
  * @author cristiano
  */
-//@Entity
-public class Anciao{
+@Entity
+public class Anciao extends BaseEntity{
+        
+    @ManyToOne
+    private Congregacao congregacao;
     
-    private String anciao;
+    @OneToOne
+    private PublicadorBatizado publicadorBatizado;
+    private String tipo;
 
     public Anciao() {
     }
-   
-    
-    public String getAnciao() {
-        return anciao;
+
+    public Anciao(Long id, Congregacao congregacao, PublicadorBatizado publicadorBatizado, String tipo) {
+        super(id);
+        this.congregacao = congregacao;
+        this.publicadorBatizado = publicadorBatizado;
+        this.tipo = tipo;
     }
 
-    public void setAnciao(String anciao) {
-        this.anciao = anciao;
+    public Congregacao getCongregacao() {
+        return congregacao;
     }
+
+    public void setCongregacao(Congregacao congregacao) {
+        this.congregacao = congregacao;
+    }
+
+    public PublicadorBatizado getPublicadorBatizado() {
+        return publicadorBatizado;
+    }
+
+    public void setPublicadorBatizado(PublicadorBatizado publicadorBatizado) {
+        this.publicadorBatizado = publicadorBatizado;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    @Override
+    public String toString() {
+        return "Anciao{" + "congregacao=" + congregacao + ", publicadorBatizado=" + publicadorBatizado + ", tipo=" + tipo + '}';
+    }
+        
     
     
 }

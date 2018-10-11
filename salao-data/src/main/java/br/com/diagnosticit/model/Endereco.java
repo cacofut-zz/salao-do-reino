@@ -5,9 +5,11 @@
  */
 package br.com.diagnosticit.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 
 /**
  *
@@ -21,6 +23,7 @@ public class Endereco extends BaseEntity {
     private String cep;
     private String complemento;
     
+    @JsonIgnore
     @ManyToOne
     private Pessoa pessoa;
     

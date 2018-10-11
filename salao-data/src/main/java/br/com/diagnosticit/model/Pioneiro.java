@@ -6,6 +6,7 @@
 package br.com.diagnosticit.model;
 
 import br.com.diagnosticit.enums.TipoPioneiro;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -20,7 +21,7 @@ import org.hibernate.annotations.ManyToAny;
  */
 @Entity
 public class Pioneiro extends BaseEntity {
-    
+        
     @ManyToOne
     private Congregacao congregacao;
     

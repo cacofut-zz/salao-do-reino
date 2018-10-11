@@ -6,6 +6,7 @@
 package br.com.diagnosticit.resource;
 
 import br.com.diagnosticit.model.Estado;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Arrays;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/estado")
 public class EstadoResource {    
-    
+       
     @GetMapping(value = "")
     public List<Estado> findEstado(){
         

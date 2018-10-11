@@ -5,6 +5,7 @@
  */
 package br.com.diagnosticit.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
@@ -18,6 +19,18 @@ import javax.persistence.OneToOne;
 @Entity
 public class Congregacao extends BaseEntity{
     
+    @JsonIgnore
+    @OneToMany(mappedBy = "congregacao")
+    private List<Pioneiro> pioneiros = new ArrayList<>();
+    
+    @JsonIgnore
+    @OneToMany(mappedBy = "congregacao")
+    private List<Anciao> anciaos = new ArrayList<>();
+    
+    @JsonIgnore
+    @OneToMany(mappedBy = "congregacao")
+    private List<ServoMinisterial> servosMinisteriais = new ArrayList<>();
+    
     private String nome;
     
     public Congregacao() {
@@ -26,9 +39,9 @@ public class Congregacao extends BaseEntity{
 
     public Congregacao(String nome) {
         this.nome = nome;
-    }
+    } 
 
-    public Congregacao(String nome, Long id) {
+    public Congregacao(Long id, String nome) {
         super(id);
         this.nome = nome;
     }
@@ -39,13 +52,32 @@ public class Congregacao extends BaseEntity{
 
     public void setNome(String nome) {
         this.nome = nome;
-    }                
+    }        
 
-    @Override
-    public String toString() {
-        return "Congregacao{" + "nome=" + nome + '}';
+    public List<Pioneiro> getPioneiros() {
+        return pioneiros;
     }
 
+    public void setPioneiros(List<Pioneiro> pioneiros) {
+        this.pioneiros = pioneiros;
+    }
+
+    public List<Anciao> getAnciaos() {
+        return anciaos;
+    }
+
+    public void setAnciaos(List<Anciao> anciaos) {
+        this.anciaos = anciaos;
+    }
+
+    public List<ServoMinisterial> getServosMinisteriais() {
+        return servosMinisteriais;
+    }
+
+    public void setServosMinisteriais(List<ServoMinisterial> servosMinisteriais) {
+        this.servosMinisteriais = servosMinisteriais;
+    }
+    
                     
     
 }

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(value = "/pioneiros")
-public class PioneiroResources {
+public class PioneiroResource {
 
     @Autowired
     private PioneiroRepository repository;

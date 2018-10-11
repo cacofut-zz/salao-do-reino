@@ -61,7 +61,7 @@ public class LoadData implements CommandLineRunner{
         Estado estado2 = new Estado("rio de janeiro", "rj");
         
         estadoRepository.save(estado1);
-        estadoRepository.save(estado2);
+        estadoRepository.save(estado2); 
         
         Cidade cidade1 = new Cidade("são paulo", estado1);
         cidade1.setEstado(estado1);
@@ -98,7 +98,7 @@ public class LoadData implements CommandLineRunner{
         endereco4.setCep("01454525");
         endereco4.setComplemento("");
         endereco4.setBairro(bairro1);    
-        enderecoRepository.saveAll(Arrays.asList(endereco1, endereco2, endereco3, endereco4));
+        
         
         Congregacao congregacao = new Congregacao();        
         congregacaoRepository.save( congregacao );        
@@ -107,8 +107,14 @@ public class LoadData implements CommandLineRunner{
         Pessoa p2 = new Pessoa("Junior", "Menezes");
         p1.getEnderecos().add(endereco1);
         p1.getEnderecos().add(endereco2);
+        endereco1.setPessoa(p1);
+        endereco2.setPessoa(p1);
         p2.getEnderecos().add(endereco3);
-        pessoaRepository.saveAll(Arrays.asList( p1, p2 ));
+        endereco3.setPessoa(p2);
+        
+        pessoaRepository  .saveAll(Arrays.asList( p1, p2 ));
+        enderecoRepository.saveAll(Arrays.asList(endereco1, endereco2, endereco3, endereco4));
+        
         
         PublicadorBatizado publicadorb1 = new PublicadorBatizado(new Date(), "Vargem grande", p1);
         PublicadorBatizado publicadorb2 = new PublicadorBatizado(new Date(), "Cesário Lange", p2);
