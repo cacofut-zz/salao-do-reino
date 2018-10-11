@@ -14,12 +14,12 @@ import javax.persistence.OneToOne;
  *
  * @author cristiano
  */
-@Entity
+//@Entity
 public class Grupo extends BaseEntity{
     
-    @OneToMany(mappedBy = "grupo")
+    //@OneToMany(mappedBy = "grupo")
     private List<Publicador> publicadores;
     
-    @OneToOne
+    //@OneToOne
     private Publicador responsavel;
 }

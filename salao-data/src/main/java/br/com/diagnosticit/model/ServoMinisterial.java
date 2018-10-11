@@ -13,19 +13,19 @@ import javax.persistence.OneToOne;
  *
  * @author cristiano
  */
-@Entity
-public class ServoMinisterial extends Pessoa{
+//@Entity
+public class ServoMinisterial {
     
-    private String servoMinisterial;
+    private String tipo;
 
 
     
     public String getServoMinisterial() {
-        return servoMinisterial;
+        return tipo;
     }
 
-    public void setServoMinisterial(String servoMinisterial) {
-        this.servoMinisterial = servoMinisterial;
+    public void setServoMinisterial(String tipo) {
+        this.tipo = tipo;
     }
     
     

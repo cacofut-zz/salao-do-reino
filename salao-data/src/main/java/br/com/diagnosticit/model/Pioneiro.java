@@ -19,15 +19,13 @@ import org.hibernate.annotations.ManyToAny;
  * @author cristiano
  */
 @Entity
-public class Pioneiro implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-    
-    @EmbeddedId
-    private PioneiroPK publicador = new PioneiroPK();
+public class Pioneiro extends BaseEntity {
     
     @ManyToOne
     private Congregacao congregacao;
+    
+    @OneToOne
+    private PublicadorBatizado publicadorBatizado;
     
     private Integer tipo;
     
@@ -35,19 +33,20 @@ public class Pioneiro implements Serializable {
     }
 
     public Pioneiro(Congregacao congregacao, PublicadorBatizado publicador, TipoPioneiro tipo) {
-        this.publicador.setPublicador(publicador);
+        this.publicadorBatizado  = publicador;
         this.congregacao = congregacao;
         this.tipo        = tipo.getCodigo();
     }
 
-    public PioneiroPK getPublicador() {
-        return publicador;
+    public PublicadorBatizado getPublicadorBatizado() {
+        return publicadorBatizado;
     }
 
-    public void setPublicador(PioneiroPK publicador) {
-        this.publicador = publicador;
+    public void setPublicadorBatizado(PublicadorBatizado publicadorBatizado) {
+        this.publicadorBatizado = publicadorBatizado;
     }
-            
+   
+    
     public Congregacao getCongregacao() {
         return congregacao;
     }
@@ -66,7 +65,7 @@ public class Pioneiro implements Serializable {
 
     @Override
     public String toString() {
-        return "Pioneiro{" + "publicador=" + publicador + ", congregacao=" + congregacao + ", tipo=" + tipo + '}';
+        return "Pioneiro{" + "congregacao=" + congregacao + ", publicadorBatizado=" + publicadorBatizado + ", tipo=" + tipo + '}';
     }
 
     

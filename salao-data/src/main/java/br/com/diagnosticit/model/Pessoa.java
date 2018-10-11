@@ -20,11 +20,13 @@ import javax.persistence.OneToMany;
  */
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Pessoa extends BaseEntity{
+public class Pessoa extends BaseEntity{
     
     private String nome;
     private String sobrenome;
+    
+    @OneToMany(mappedBy = "pessoa")
+    private List<Endereco> enderecos = new ArrayList<>();
 
     public Pessoa() {
         
@@ -58,6 +60,14 @@ public abstract class Pessoa extends BaseEntity{
     public void setSobrenome(String sobrenome) {
         this.sobrenome = sobrenome;
     }
+
+    public List<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }        
 
     @Override
     public String toString() {

@@ -13,12 +13,12 @@ import javax.persistence.OneToOne;
  *
  * @author cristiano
  */
-@Entity
-public class Publicador extends Pessoa{
+//@Entity
+public class Publicador{
     
     private String publicador;
         
-    @ManyToOne
+    //@ManyToOne
     private Grupo grupo;
 
   

@@ -13,8 +13,8 @@ import javax.persistence.OneToOne;
  *
  * @author cristiano
  */
-@Entity
-public class Anciao extends Pessoa{
+//@Entity
+public class Anciao{
     
     private String anciao;
 

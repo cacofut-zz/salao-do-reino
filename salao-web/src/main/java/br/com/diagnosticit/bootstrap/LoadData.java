@@ -70,8 +70,7 @@ public class LoadData implements CommandLineRunner{
         
         Bairro bairro1 = new Bairro("paraisópolis", cidade1);          
         bairroRepository.save(bairro1);
-              
-        
+                      
         Endereco endereco1 = new Endereco();
         endereco1.setLogradouro("Rua Ernest Renam");
         endereco1.setNumero("954");
@@ -80,21 +79,42 @@ public class LoadData implements CommandLineRunner{
         endereco1.setBairro(bairro1);  
         
         Endereco endereco2 = new Endereco();
-        endereco2.setLogradouro("Rua Marioto Ferreira");
-        endereco2.setNumero("1024");
-        endereco2.setCep("05659020");
-        endereco2.setComplemento("A");
+        endereco2.setLogradouro("Rua quinze de abril");
+        endereco2.setNumero("123");
+        endereco2.setCep("00000000");
+        endereco2.setComplemento("");
         endereco2.setBairro(bairro1);  
         
-        Congregacao congregacao = new Congregacao();
+        Endereco endereco3 = new Endereco();
+        endereco3.setLogradouro("Rua rodolfo lutze");
+        endereco3.setNumero("124");
+        endereco3.setCep("02020202");
+        endereco3.setComplemento("");
+        endereco3.setBairro(bairro1);  
         
-        congregacaoRepository.save( congregacao );
-        enderecoRepository   .saveAll(Arrays.asList(endereco1, endereco2));
+        Endereco endereco4 = new Endereco();
+        endereco4.setLogradouro("Rua herbert spencer");
+        endereco4.setNumero("789");
+        endereco4.setCep("01454525");
+        endereco4.setComplemento("");
+        endereco4.setBairro(bairro1);    
+        enderecoRepository.saveAll(Arrays.asList(endereco1, endereco2, endereco3, endereco4));
         
-        PublicadorBatizado publicadorBatizado = new PublicadorBatizado(new Date(), "Cristiano", "carvalho amaral");
-        publicadorBatizadoRepository.save(publicadorBatizado);
+        Congregacao congregacao = new Congregacao();        
+        congregacaoRepository.save( congregacao );        
         
-        Pioneiro pioneiro1 = new Pioneiro(congregacao, publicadorBatizado, TipoPioneiro.PIONEIRO_REGULAR);
+        Pessoa p1 = new Pessoa("cristiano", "carvalho amaral");        
+        Pessoa p2 = new Pessoa("Junior", "Menezes");
+        p1.getEnderecos().add(endereco1);
+        p1.getEnderecos().add(endereco2);
+        p2.getEnderecos().add(endereco3);
+        pessoaRepository.saveAll(Arrays.asList( p1, p2 ));
+        
+        PublicadorBatizado publicadorb1 = new PublicadorBatizado(new Date(), "Vargem grande", p1);
+        PublicadorBatizado publicadorb2 = new PublicadorBatizado(new Date(), "Cesário Lange", p2);
+        publicadorBatizadoRepository.saveAll(Arrays.asList(publicadorb1, publicadorb2));
+        
+        Pioneiro pioneiro1 = new Pioneiro(congregacao, publicadorb1, TipoPioneiro.PIONEIRO_REGULAR);
         pioneiroRepository.save(pioneiro1);
        
         List<Pioneiro> pioneiros = pioneiroRepository.findAll();
