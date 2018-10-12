@@ -27,7 +27,7 @@ public class ServoMinisterial extends BaseEntity{
     public ServoMinisterial() {
     }
 
-    public ServoMinisterial(Congregacao congregacao, PublicadorBatizado publicadorBatizado, String tipo, Long id) {
+    public ServoMinisterial(Long id, Congregacao congregacao, PublicadorBatizado publicadorBatizado, String tipo) {
         super(id);
         this.congregacao = congregacao;
         this.publicadorBatizado = publicadorBatizado;

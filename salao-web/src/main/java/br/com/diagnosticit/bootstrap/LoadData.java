@@ -15,6 +15,8 @@ import br.com.diagnosticit.model.Estado;
 import br.com.diagnosticit.model.Pessoa;
 import br.com.diagnosticit.model.Pioneiro;
 import br.com.diagnosticit.model.PublicadorBatizado;
+import br.com.diagnosticit.model.ServoMinisterial;
+import br.com.diagnosticit.repositories.AnciaoRepository;
 import br.com.diagnosticit.repositories.BairroRepository;
 import br.com.diagnosticit.repositories.CidadeRepository;
 import br.com.diagnosticit.repositories.CongregacaoRepository;
@@ -23,6 +25,7 @@ import br.com.diagnosticit.repositories.EstadoRepository;
 import br.com.diagnosticit.repositories.PessoaRepository;
 import br.com.diagnosticit.repositories.PioneiroRepository;
 import br.com.diagnosticit.repositories.PublicadorBatizadoRepository;
+import br.com.diagnosticit.repositories.ServoMinisterialRepository;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -39,20 +42,33 @@ public class LoadData implements CommandLineRunner{
 
     @Autowired
     private EstadoRepository estadoRepository;
+    
     @Autowired
     private CidadeRepository cidadeRepository;
+    
     @Autowired
     private BairroRepository bairroRepository;
+    
     @Autowired
     private EnderecoRepository enderecoRepository;
+    
     @Autowired
     private PessoaRepository pessoaRepository;
+    
     @Autowired 
     private CongregacaoRepository congregacaoRepository;
+    
     @Autowired
     private PublicadorBatizadoRepository publicadorBatizadoRepository;
+    
     @Autowired
     private PioneiroRepository pioneiroRepository;
+    
+    @Autowired
+    private ServoMinisterialRepository servoMinisterialRepository;
+    
+    @Autowired
+    private AnciaoRepository anciaoRepository;
     
     @Override
     public void run(String... args) throws Exception {
@@ -122,9 +138,13 @@ public class LoadData implements CommandLineRunner{
         
         Pioneiro pioneiro1 = new Pioneiro(congregacao, publicadorb1, TipoPioneiro.PIONEIRO_REGULAR);
         pioneiroRepository.save(pioneiro1);
-       
-        List<Pioneiro> pioneiros = pioneiroRepository.findAll();
-        pioneiros.forEach( p -> System.out.println(p) );
+        
+        ServoMinisterial servo1 = new ServoMinisterial(null, congregacao, publicadorb1, "Servo");
+        servoMinisterialRepository.save(servo1);
+        
+        Anciao anciao1 = new Anciao(null, congregacao, publicadorb2, "Ancião");
+        anciaoRepository.save(anciao1);
+
          
     }
     
