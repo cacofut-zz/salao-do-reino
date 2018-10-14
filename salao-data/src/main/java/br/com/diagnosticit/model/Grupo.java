@@ -18,8 +18,8 @@ import javax.persistence.OneToOne;
 public class Grupo extends BaseEntity{
     
     //@OneToMany(mappedBy = "grupo")
-    private List<Publicador> publicadores;
+   // private List<Publicador> publicadores;
     
     //@OneToOne
-    private Publicador responsavel;
+    //private Publicador responsavel;
 }

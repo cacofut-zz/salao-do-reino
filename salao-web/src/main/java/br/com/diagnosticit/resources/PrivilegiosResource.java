@@ -5,8 +5,8 @@
  */
 package br.com.diagnosticit.resources;
 
-import br.com.diagnosticit.model.ServoMinisterial;
-import br.com.diagnosticit.repositories.ServoMinisterialRepository;
+import br.com.diagnosticit.model.Privilegio;
+import br.com.diagnosticit.repositories.PrivilegioRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,16 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
  * @author cristiano
  */
 @RestController
-@RequestMapping(value = "/servosMinisteriais")
-public class ServoMinisterialResource {
+@RequestMapping(value = "/privilegios")
+public class PrivilegiosResource {
     
-//    @Autowired
-//    private ServoMinisterialRepository servoMinisterialRepository;
-//    
-//    @GetMapping
-//    public ResponseEntity<List<ServoMinisterial>> finAll(){
-//        List<ServoMinisterial> servos = servoMinisterialRepository.findAll();
-//        return ResponseEntity.ok().body(servos);
-//                
-//    }
+    @Autowired
+    private PrivilegioRepository privilegioRepository;
+    
+    @GetMapping
+    public ResponseEntity<List<Privilegio>> findAll(){        
+        List<Privilegio> privilegios = privilegioRepository.findAll();
+        return ResponseEntity.ok().body(privilegios);
+    }
+
 }

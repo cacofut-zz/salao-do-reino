@@ -21,29 +21,24 @@ public class Congregacao extends BaseEntity{
     
     @JsonIgnore
     @OneToMany(mappedBy = "congregacao")
-    private List<Pioneiro> pioneiros = new ArrayList<>();
-    
-    @JsonIgnore
-    @OneToMany(mappedBy = "congregacao")
-    private List<Anciao> anciaos = new ArrayList<>();
-    
-    @JsonIgnore
-    @OneToMany(mappedBy = "congregacao")
-    private List<ServoMinisterial> servosMinisteriais = new ArrayList<>();
-    
+    private List<Publicador> publicadores;
     private String nome;
-    
+
     public Congregacao() {
-        this("Default");
     }
 
-    public Congregacao(String nome) {
-        this.nome = nome;
-    } 
-
-    public Congregacao(Long id, String nome) {
+    public Congregacao(List<Publicador> publicadores, String nome, Long id) {
         super(id);
+        this.publicadores = publicadores;
         this.nome = nome;
+    }
+
+    public List<Publicador> getPublicadores() {
+        return publicadores;
+    }
+
+    public void setPublicadores(List<Publicador> publicadores) {
+        this.publicadores = publicadores;
     }
 
     public String getNome() {
@@ -52,32 +47,7 @@ public class Congregacao extends BaseEntity{
 
     public void setNome(String nome) {
         this.nome = nome;
-    }        
-
-    public List<Pioneiro> getPioneiros() {
-        return pioneiros;
-    }
-
-    public void setPioneiros(List<Pioneiro> pioneiros) {
-        this.pioneiros = pioneiros;
-    }
-
-    public List<Anciao> getAnciaos() {
-        return anciaos;
-    }
-
-    public void setAnciaos(List<Anciao> anciaos) {
-        this.anciaos = anciaos;
-    }
-
-    public List<ServoMinisterial> getServosMinisteriais() {
-        return servosMinisteriais;
-    }
-
-    public void setServosMinisteriais(List<ServoMinisterial> servosMinisteriais) {
-        this.servosMinisteriais = servosMinisteriais;
     }
     
-                    
     
 }

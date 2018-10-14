@@ -14,6 +14,7 @@ import br.com.diagnosticit.model.Endereco;
 import br.com.diagnosticit.model.Estado;
 import br.com.diagnosticit.model.Pessoa;
 import br.com.diagnosticit.model.Pioneiro;
+import br.com.diagnosticit.model.Publicador;
 import br.com.diagnosticit.model.PublicadorBatizado;
 import br.com.diagnosticit.model.ServoMinisterial;
 import br.com.diagnosticit.repositories.AnciaoRepository;
@@ -25,6 +26,7 @@ import br.com.diagnosticit.repositories.EstadoRepository;
 import br.com.diagnosticit.repositories.PessoaRepository;
 import br.com.diagnosticit.repositories.PioneiroRepository;
 import br.com.diagnosticit.repositories.PublicadorBatizadoRepository;
+import br.com.diagnosticit.repositories.PublicadorRepository;
 import br.com.diagnosticit.repositories.ServoMinisterialRepository;
 import java.util.Arrays;
 import java.util.Date;
@@ -69,6 +71,9 @@ public class LoadData implements CommandLineRunner{
     
     @Autowired
     private AnciaoRepository anciaoRepository;
+    
+    @Autowired
+    private PublicadorRepository publicadorRepository;
     
     @Override
     public void run(String... args) throws Exception {
@@ -127,22 +132,29 @@ public class LoadData implements CommandLineRunner{
         endereco2.setPessoa(p1);
         p2.getEnderecos().add(endereco3);
         endereco3.setPessoa(p2);
-        
         pessoaRepository  .saveAll(Arrays.asList( p1, p2 ));
         enderecoRepository.saveAll(Arrays.asList(endereco1, endereco2, endereco3, endereco4));
         
+        Publicador pub1 = new Publicador(null, true, p1, congregacao);
+        Publicador pub2 = new Publicador(null, true, p2, congregacao);
+        publicadorRepository.saveAll(Arrays.asList(pub1, pub2));
         
-        PublicadorBatizado publicadorb1 = new PublicadorBatizado(new Date(), "Vargem grande", p1);
-        PublicadorBatizado publicadorb2 = new PublicadorBatizado(new Date(), "Cesário Lange", p2);
+        PublicadorBatizado publicadorb1 = new PublicadorBatizado(null, new Date(), "Vargem grande", pub1);
+        PublicadorBatizado publicadorb2 = new PublicadorBatizado(null, new Date(), "Cesário Lange", pub2);
         publicadorBatizadoRepository.saveAll(Arrays.asList(publicadorb1, publicadorb2));
         
-        Pioneiro pioneiro1 = new Pioneiro(congregacao, publicadorb1, TipoPioneiro.PIONEIRO_REGULAR);
-        pioneiroRepository.save(pioneiro1);
+        Pioneiro pioneiro1 = new Pioneiro(null, TipoPioneiro.PIONEIRO_REGULAR,
+                new Date(), new Date(), true, publicadorb1);        
+        pioneiroRepository.save(pioneiro1);              
         
-        ServoMinisterial servo1 = new ServoMinisterial(null, congregacao, publicadorb1, "Servo");
+        ServoMinisterial servo1 = new ServoMinisterial(null, "Servo", new Date(), new Date(), true, publicadorb1);
         servoMinisterialRepository.save(servo1);
         
-        Anciao anciao1 = new Anciao(null, congregacao, publicadorb2, "Ancião");
+       Pioneiro pioneiro2 = new Pioneiro(null, TipoPioneiro.PIONEIRO_ESPECIAL,
+                new Date(), new Date(), true, publicadorb2);
+        pioneiroRepository.save(pioneiro2);
+        
+        Anciao anciao1 = new Anciao(null, "Ancião", new Date(), new Date(), true, publicadorb2);
         anciaoRepository.save(anciao1);
 
          

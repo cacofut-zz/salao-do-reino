@@ -5,15 +5,13 @@
  */
 package br.com.diagnosticit.repositories;
 
-import br.com.diagnosticit.model.ServoMinisterial;
+import br.com.diagnosticit.model.Publicador;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author cristiano
  */
-//@Repository
-public interface ServoMinisterialRepository extends JpaRepository<ServoMinisterial, Long>{
+public interface PublicadorRepository extends JpaRepository<Publicador, Long>{
     
 }

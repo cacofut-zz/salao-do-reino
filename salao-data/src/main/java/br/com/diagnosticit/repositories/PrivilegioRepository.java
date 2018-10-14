@@ -5,7 +5,7 @@
  */
 package br.com.diagnosticit.repositories;
 
-import br.com.diagnosticit.model.ServoMinisterial;
+import br.com.diagnosticit.model.Privilegio;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
  *
  * @author cristiano
  */
-//@Repository
-public interface ServoMinisterialRepository extends JpaRepository<ServoMinisterial, Long>{
+@Repository
+public interface PrivilegioRepository extends JpaRepository<Privilegio, Long>{
     
 }

@@ -13,23 +13,51 @@ import javax.persistence.OneToOne;
  *
  * @author cristiano
  */
-//@Entity
-public class Publicador{
+@Entity
+public class Publicador extends BaseEntity{
     
-    private String publicador;
-        
-    //@ManyToOne
-    private Grupo grupo;
+    private boolean ativo;
+    
+    @OneToOne
+    private Pessoa pessoa;    
+    
+    @OneToOne
+    private Congregacao congregacao;
 
-  
-
-    public String getPublicador() {
-        return publicador;
+    public Publicador() {
     }
 
-    public void setPublicador(String publicador) {
-        this.publicador = publicador;
+    public Publicador(Long id, boolean ativo, Pessoa pessoa, Congregacao congregacao) {
+        super(id);
+        this.ativo = ativo;
+        this.pessoa = pessoa;
+        this.congregacao = congregacao;
     }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
+
+    public Congregacao getCongregacao() {
+        return congregacao;
+    }
+
+    public void setCongregacao(Congregacao congregacao) {
+        this.congregacao = congregacao;
+    }
+    
     
     
 }

@@ -6,6 +6,7 @@
 package br.com.diagnosticit.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -15,39 +16,17 @@ import javax.persistence.OneToOne;
  * @author cristiano
  */
 @Entity
-public class ServoMinisterial extends BaseEntity{
-    
-    @ManyToOne
-    private Congregacao congregacao;
-    
-    @OneToOne
-    private PublicadorBatizado publicadorBatizado;    
+public class ServoMinisterial extends Privilegio{
+     
     private String tipo;
 
     public ServoMinisterial() {
     }
 
-    public ServoMinisterial(Long id, Congregacao congregacao, PublicadorBatizado publicadorBatizado, String tipo) {
-        super(id);
-        this.congregacao = congregacao;
-        this.publicadorBatizado = publicadorBatizado;
+    public ServoMinisterial(Long id, String tipo, Date dataInicial, Date dataFinal, 
+            boolean ativo, PublicadorBatizado publicadorBatizado) {
+        super(id, dataInicial, dataFinal, ativo, publicadorBatizado);
         this.tipo = tipo;
-    }
-
-    public Congregacao getCongregacao() {
-        return congregacao;
-    }
-
-    public void setCongregacao(Congregacao congregacao) {
-        this.congregacao = congregacao;
-    }
-
-    public PublicadorBatizado getPublicadorBatizado() {
-        return publicadorBatizado;
-    }
-
-    public void setPublicadorBatizado(PublicadorBatizado publicadorBatizado) {
-        this.publicadorBatizado = publicadorBatizado;
     }
 
     public String getTipo() {
@@ -58,10 +37,5 @@ public class ServoMinisterial extends BaseEntity{
         this.tipo = tipo;
     }
 
-    @Override
-    public String toString() {
-        return "ServoMinisterial{" + "congregacao=" + congregacao + ", publicadorBatizado=" + publicadorBatizado + ", tipo=" + tipo + '}';
-    }
-            
-    
+        
 }

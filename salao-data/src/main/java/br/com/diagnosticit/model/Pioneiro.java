@@ -8,6 +8,7 @@ package br.com.diagnosticit.model;
 import br.com.diagnosticit.enums.TipoPioneiro;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -20,41 +21,18 @@ import org.hibernate.annotations.ManyToAny;
  * @author cristiano
  */
 @Entity
-public class Pioneiro extends BaseEntity {
-        
-    @ManyToOne
-    private Congregacao congregacao;
-    
-    @OneToOne
-    private PublicadorBatizado publicadorBatizado;
+public class Pioneiro extends Privilegio{               
     
     private Integer tipo;
     
     public Pioneiro() {
     }
 
-    public Pioneiro(Congregacao congregacao, PublicadorBatizado publicador, TipoPioneiro tipo) {
-        this.publicadorBatizado  = publicador;
-        this.congregacao = congregacao;
-        this.tipo        = tipo.getCodigo();
-    }
-
-    public PublicadorBatizado getPublicadorBatizado() {
-        return publicadorBatizado;
-    }
-
-    public void setPublicadorBatizado(PublicadorBatizado publicadorBatizado) {
-        this.publicadorBatizado = publicadorBatizado;
-    }
-   
-    
-    public Congregacao getCongregacao() {
-        return congregacao;
-    }
-
-    public void setCongregacao(Congregacao congregacao) {
-        this.congregacao = congregacao;
-    }
+    public Pioneiro(Long id, TipoPioneiro tipo, Date dataInicial, Date dataFinal, 
+            boolean ativo, PublicadorBatizado publicadorBatizado) {
+        super(id, dataInicial, dataFinal, ativo, publicadorBatizado);
+        this.tipo = tipo.getCodigo();
+    }        
 
     public TipoPioneiro getTipo() {
         return TipoPioneiro.toEnum(this.tipo);
@@ -64,12 +42,6 @@ public class Pioneiro extends BaseEntity {
         this.tipo = tipo.getCodigo();
     }
 
-    @Override
-    public String toString() {
-        return "Pioneiro{" + "congregacao=" + congregacao + ", publicadorBatizado=" + publicadorBatizado + ", tipo=" + tipo + '}';
-    }
-
-    
     
     
 }

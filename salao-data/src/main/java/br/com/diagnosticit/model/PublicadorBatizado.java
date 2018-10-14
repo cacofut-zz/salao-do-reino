@@ -5,9 +5,13 @@
  */
 package br.com.diagnosticit.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -17,27 +21,24 @@ import javax.persistence.OneToOne;
 @Entity
 public class PublicadorBatizado extends BaseEntity{
     
-    private Date dataBatismo;
-    
+    private Date dataBatismo;    
     private String local;
-    
+     
     @OneToOne
-    private Pessoa pessoa;
- 
+    private Publicador publicador;
+    
+    @JsonIgnore
+    @OneToMany(mappedBy = "publicadorBatizado")
+    private List<Privilegio> privilegios = new ArrayList<>();
+        
     public PublicadorBatizado() {
     }
 
-    public PublicadorBatizado(Date dataBatismo, String local, Pessoa pessoa) {
-        this.dataBatismo = dataBatismo;
-        this.local  = local;
-        this.pessoa = pessoa;
-    }
-
-    public PublicadorBatizado(Date dataBatismo, String local, Pessoa pessoa, Long id) {
+    public PublicadorBatizado(Long id, Date dataBatismo, String local, Publicador publicador) {
         super(id);
         this.dataBatismo = dataBatismo;
         this.local = local;
-        this.pessoa = pessoa;
+        this.publicador = publicador;
     }
 
     public Date getDataBatismo() {
@@ -56,18 +57,20 @@ public class PublicadorBatizado extends BaseEntity{
         this.local = local;
     }
 
-    public Pessoa getPessoa() {
-        return pessoa;
+    public Publicador getPublicador() {
+        return publicador;
     }
 
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
+    public void setPublicador(Publicador publicador) {
+        this.publicador = publicador;
     }
 
-    @Override
-    public String toString() {
-        return "PublicadorBatizado{" + "dataBatismo=" + dataBatismo + ", local=" + local + ", pessoa=" + pessoa + '}';
+    public List<Privilegio> getPrivilegios() {
+        return privilegios;
     }
-               
+
+    public void setPrivilegios(List<Privilegio> privilegios) {
+        this.privilegios = privilegios;
+    }
     
 }
