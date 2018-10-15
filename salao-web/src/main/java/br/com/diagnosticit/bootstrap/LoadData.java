@@ -16,16 +16,17 @@ import br.com.diagnosticit.model.Pessoa;
 import br.com.diagnosticit.model.Pioneiro;
 import br.com.diagnosticit.model.Publicador;
 import br.com.diagnosticit.model.PublicadorBatizado;
+import br.com.diagnosticit.model.PublicadorNaoBatizado;
 import br.com.diagnosticit.model.ServoMinisterial;
 import br.com.diagnosticit.repositories.AnciaoRepository;
 import br.com.diagnosticit.repositories.BairroRepository;
 import br.com.diagnosticit.repositories.CidadeRepository;
 import br.com.diagnosticit.repositories.CongregacaoRepository;
 import br.com.diagnosticit.repositories.EnderecoRepository;
-import br.com.diagnosticit.repositories.EstadoRepository;
 import br.com.diagnosticit.repositories.PessoaRepository;
 import br.com.diagnosticit.repositories.PioneiroRepository;
 import br.com.diagnosticit.repositories.PublicadorBatizadoRepository;
+import br.com.diagnosticit.repositories.PublicadorNaoBatizadoRepository;
 import br.com.diagnosticit.repositories.PublicadorRepository;
 import br.com.diagnosticit.repositories.ServoMinisterialRepository;
 import java.util.Arrays;
@@ -34,6 +35,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import br.com.diagnosticit.repositories.EstadoJPARepository;
 
 /**
  *
@@ -43,7 +45,7 @@ import org.springframework.stereotype.Component;
 public class LoadData implements CommandLineRunner{
 
     @Autowired
-    private EstadoRepository estadoRepository;
+    private EstadoJPARepository estadoRepository;
     
     @Autowired
     private CidadeRepository cidadeRepository;
@@ -74,6 +76,9 @@ public class LoadData implements CommandLineRunner{
     
     @Autowired
     private PublicadorRepository publicadorRepository;
+    
+    @Autowired
+    private PublicadorNaoBatizadoRepository publicadorNaoBatizadoRepository;
     
     @Override
     public void run(String... args) throws Exception {
@@ -120,41 +125,72 @@ public class LoadData implements CommandLineRunner{
         endereco4.setComplemento("");
         endereco4.setBairro(bairro1);    
         
+        Endereco endereco5 = new Endereco();
+        endereco5.setLogradouro("rua flavio américo maurano");
+        endereco5.setNumero("789");
+        endereco5.setCep("05659020");
+        endereco5.setComplemento("casa B");
+        endereco5.setBairro(bairro1);
         
-        Congregacao congregacao = new Congregacao();        
+        
+        Congregacao congregacao = new Congregacao(null, "Fazenda Morumbi");        
         congregacaoRepository.save( congregacao );        
         
         Pessoa p1 = new Pessoa("cristiano", "carvalho amaral");        
         Pessoa p2 = new Pessoa("Junior", "Menezes");
-        p1.getEnderecos().add(endereco1);
-        p1.getEnderecos().add(endereco2);
+        Pessoa p3 = new Pessoa("Luca", "Silva");
+
+        p1.getEnderecos().addAll(Arrays.asList(endereco1, endereco2));
         endereco1.setPessoa(p1);
         endereco2.setPessoa(p1);
+        
         p2.getEnderecos().add(endereco3);
         endereco3.setPessoa(p2);
-        pessoaRepository  .saveAll(Arrays.asList( p1, p2 ));
-        enderecoRepository.saveAll(Arrays.asList(endereco1, endereco2, endereco3, endereco4));
         
-        Publicador pub1 = new Publicador(null, true, p1, congregacao);
-        Publicador pub2 = new Publicador(null, true, p2, congregacao);
-        publicadorRepository.saveAll(Arrays.asList(pub1, pub2));
+        p3.getEnderecos().add(endereco5);
+        endereco5.setPessoa(p3);
         
-        PublicadorBatizado publicadorb1 = new PublicadorBatizado(null, new Date(), "Vargem grande", pub1);
-        PublicadorBatizado publicadorb2 = new PublicadorBatizado(null, new Date(), "Cesário Lange", pub2);
+        pessoaRepository  .saveAll(Arrays.asList( p1, p2, p3 ));
+        enderecoRepository.saveAll(Arrays.asList(endereco1, endereco2, 
+                endereco3, endereco4, endereco5));
+        
+        Publicador pub1 = new Publicador(null, true, new Date(), new Date(), 
+                p1, congregacao);
+        Publicador pub2 = new Publicador(null, true, new Date(), new Date(),
+                p2, congregacao);
+        Publicador pub3 = new Publicador(null, true, new Date(), new Date(),
+                p3, congregacao);
+        
+        publicadorRepository.saveAll(Arrays.asList(pub1, pub2, pub3));
+        
+        PublicadorBatizado publicadorb1 = new PublicadorBatizado(null, 
+                new Date(), "Vargem grande", pub1);
+        
+        PublicadorBatizado publicadorb2 = new PublicadorBatizado(null, 
+                new Date(), "Cesário Lange", pub2);
+        
+        PublicadorNaoBatizado publicadorNB1 = new PublicadorNaoBatizado(null, 
+                "Publicador não Batizado", pub3);
+        
         publicadorBatizadoRepository.saveAll(Arrays.asList(publicadorb1, publicadorb2));
+        
+        publicadorNaoBatizadoRepository.saveAll(Arrays.asList( publicadorNB1 ));
+                
         
         Pioneiro pioneiro1 = new Pioneiro(null, TipoPioneiro.PIONEIRO_REGULAR,
                 new Date(), new Date(), true, publicadorb1);        
         pioneiroRepository.save(pioneiro1);              
         
-        ServoMinisterial servo1 = new ServoMinisterial(null, "Servo", new Date(), new Date(), true, publicadorb1);
+        ServoMinisterial servo1 = new ServoMinisterial(null, "Servo", new Date(), 
+                new Date(), true, publicadorb1);
         servoMinisterialRepository.save(servo1);
         
-       Pioneiro pioneiro2 = new Pioneiro(null, TipoPioneiro.PIONEIRO_ESPECIAL,
+        Pioneiro pioneiro2 = new Pioneiro(null, TipoPioneiro.PIONEIRO_ESPECIAL,
                 new Date(), new Date(), true, publicadorb2);
         pioneiroRepository.save(pioneiro2);
         
-        Anciao anciao1 = new Anciao(null, "Ancião", new Date(), new Date(), true, publicadorb2);
+        Anciao anciao1 = new Anciao(null, "Ancião", new Date(), new Date(), 
+                true, publicadorb2);
         anciaoRepository.save(anciao1);
 
          

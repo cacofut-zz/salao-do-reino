@@ -5,6 +5,7 @@
  */
 package br.com.diagnosticit.model;
 
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -17,6 +18,8 @@ import javax.persistence.OneToOne;
 public class Publicador extends BaseEntity{
     
     private boolean ativo;
+    private Date dataInicial;
+    private Date dataFinal;
     
     @OneToOne
     private Pessoa pessoa;    
@@ -27,9 +30,11 @@ public class Publicador extends BaseEntity{
     public Publicador() {
     }
 
-    public Publicador(Long id, boolean ativo, Pessoa pessoa, Congregacao congregacao) {
+    public Publicador(Long id, boolean ativo, Date dataInicial, Date dataFinal, Pessoa pessoa, Congregacao congregacao) {
         super(id);
         this.ativo = ativo;
+        this.dataInicial = dataInicial;
+        this.dataFinal   = dataFinal;
         this.pessoa = pessoa;
         this.congregacao = congregacao;
     }
@@ -56,6 +61,22 @@ public class Publicador extends BaseEntity{
 
     public void setCongregacao(Congregacao congregacao) {
         this.congregacao = congregacao;
+    }
+
+    public Date getDataInicial() {
+        return dataInicial;
+    }
+
+    public void setDataInicial(Date dataInicial) {
+        this.dataInicial = dataInicial;
+    }
+
+    public Date getDataFinal() {
+        return dataFinal;
+    }
+
+    public void setDataFinal(Date dataFinal) {
+        this.dataFinal = dataFinal;
     }
     
     

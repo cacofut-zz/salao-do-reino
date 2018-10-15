@@ -30,6 +30,7 @@ public class Privilegio extends BaseEntity{
     private Date dataFinal;
     private boolean ativo;
      
+    @JsonIgnore
     @ManyToOne
     private PublicadorBatizado publicadorBatizado;
 

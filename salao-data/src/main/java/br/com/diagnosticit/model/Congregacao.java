@@ -21,15 +21,14 @@ public class Congregacao extends BaseEntity{
     
     @JsonIgnore
     @OneToMany(mappedBy = "congregacao")
-    private List<Publicador> publicadores;
+    private List<Publicador> publicadores = new ArrayList<>();
     private String nome;
 
     public Congregacao() {
     }
 
-    public Congregacao(List<Publicador> publicadores, String nome, Long id) {
-        super(id);
-        this.publicadores = publicadores;
+    public Congregacao(Long id, String nome) {
+        super(id);     
         this.nome = nome;
     }
 

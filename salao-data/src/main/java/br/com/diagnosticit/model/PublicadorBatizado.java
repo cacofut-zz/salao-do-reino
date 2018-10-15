@@ -27,7 +27,7 @@ public class PublicadorBatizado extends BaseEntity{
     @OneToOne
     private Publicador publicador;
     
-    @JsonIgnore
+    //@JsonIgnore
     @OneToMany(mappedBy = "publicadorBatizado")
     private List<Privilegio> privilegios = new ArrayList<>();
         

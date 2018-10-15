@@ -5,15 +5,15 @@
  */
 package br.com.diagnosticit.repositories;
 
-import br.com.diagnosticit.model.Estado;
+import br.com.diagnosticit.model.PublicadorNaoBatizado;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author cristianoca
+ * @author cristiano
  */
 @Repository
-public interface EstadoRepository extends JpaRepository<Estado, Long>{
+public interface PublicadorNaoBatizadoRepository extends JpaRepository<PublicadorNaoBatizado, Long>{
     
 }
