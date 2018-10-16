@@ -23,7 +23,7 @@ import javax.persistence.MappedSuperclass;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Privilegio extends BaseEntity{
+public abstract class Privilegio extends BaseEntity{
 
     
     private Date dataInicial;
@@ -45,9 +45,7 @@ public class Privilegio extends BaseEntity{
         this.ativo = ativo;
         this.publicadorBatizado = publicadorBatizado;
     }
-   
-    
-
+       
     public Date getDataInicial() {
         return dataInicial;
     }

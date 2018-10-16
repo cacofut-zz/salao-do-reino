@@ -30,7 +30,8 @@ public class Publicador extends BaseEntity{
     public Publicador() {
     }
 
-    public Publicador(Long id, boolean ativo, Date dataInicial, Date dataFinal, Pessoa pessoa, Congregacao congregacao) {
+    public Publicador(Long id, boolean ativo, Date dataInicial, Date dataFinal, 
+            Pessoa pessoa, Congregacao congregacao) {
         super(id);
         this.ativo = ativo;
         this.dataInicial = dataInicial;

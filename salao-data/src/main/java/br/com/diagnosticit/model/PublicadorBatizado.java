@@ -5,8 +5,6 @@
  */
 package br.com.diagnosticit.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

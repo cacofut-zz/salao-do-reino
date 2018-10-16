@@ -11,6 +11,7 @@ import br.com.diagnosticit.services.exceptions.ObjectNotFoundException;
 import java.util.Optional;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,7 +19,8 @@ import org.springframework.stereotype.Service;
  * @author cristiano
  */
 @Service
-public class EstadoJPAServiceImpl implements EstadoService{
+//@Profile("springdatajpa")
+public class EstadoSDJPAService implements EstadoService{
 
     @Autowired    
     private EstadoJPARepository estadoRepository;
