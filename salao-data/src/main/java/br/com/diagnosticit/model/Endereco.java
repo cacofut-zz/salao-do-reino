@@ -7,8 +7,10 @@ package br.com.diagnosticit.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import jdk.nashorn.internal.ir.annotations.Ignore;
 
 /**
@@ -22,10 +24,6 @@ public class Endereco extends BaseEntity {
     private String numero;
     private String cep;
     private String complemento;
-    
-    @JsonIgnore
-    @ManyToOne
-    private Pessoa pessoa;
     
     @ManyToOne
     private Bairro bairro;
@@ -90,15 +88,5 @@ public class Endereco extends BaseEntity {
         this.bairro = bairro;
     }
 
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
     
-     
-    
-   
 }

@@ -11,6 +11,7 @@ import br.com.diagnosticit.model.Bairro;
 import br.com.diagnosticit.model.Cidade;
 import br.com.diagnosticit.model.Congregacao;
 import br.com.diagnosticit.model.Endereco;
+import br.com.diagnosticit.model.EnderecoPessoa;
 import br.com.diagnosticit.model.Estado;
 import br.com.diagnosticit.model.Pessoa;
 import br.com.diagnosticit.model.Pioneiro;
@@ -22,6 +23,7 @@ import br.com.diagnosticit.repositories.AnciaoRepository;
 import br.com.diagnosticit.repositories.BairroRepository;
 import br.com.diagnosticit.repositories.CidadeRepository;
 import br.com.diagnosticit.repositories.CongregacaoRepository;
+import br.com.diagnosticit.repositories.EnderecoPessoaRepository;
 import br.com.diagnosticit.repositories.EnderecoRepository;
 import br.com.diagnosticit.repositories.PessoaRepository;
 import br.com.diagnosticit.repositories.PioneiroRepository;
@@ -79,6 +81,9 @@ public class LoadData implements CommandLineRunner{
     
     @Autowired
     private PublicadorNaoBatizadoRepository publicadorNaoBatizadoRepository;
+    
+    @Autowired
+    private EnderecoPessoaRepository enderecoPessoaRepository;
     
     @Override
     public void run(String... args) throws Exception {
@@ -139,20 +144,16 @@ public class LoadData implements CommandLineRunner{
         Pessoa p1 = new Pessoa("cristiano", "carvalho amaral");        
         Pessoa p2 = new Pessoa("Junior", "Menezes");
         Pessoa p3 = new Pessoa("Luca", "Silva");
-
-        p1.getEnderecos().addAll(Arrays.asList(endereco1, endereco2));
-        endereco1.setPessoa(p1);
-        endereco2.setPessoa(p1);
         
-        p2.getEnderecos().add(endereco3);
-        endereco3.setPessoa(p2);
-        
-        p3.getEnderecos().add(endereco5);
-        endereco5.setPessoa(p3);
+        EnderecoPessoa ep1 = new EnderecoPessoa(null, p1, endereco1);
+        EnderecoPessoa ep2 = new EnderecoPessoa(null, p1, endereco2);
+        EnderecoPessoa ep3 = new EnderecoPessoa(null, p2, endereco3);
+        EnderecoPessoa ep4 = new EnderecoPessoa(null, p3, endereco4);
         
         pessoaRepository  .saveAll(Arrays.asList( p1, p2, p3 ));
         enderecoRepository.saveAll(Arrays.asList(endereco1, endereco2, 
-                endereco3, endereco4, endereco5));
+            endereco3, endereco4, endereco5));      
+        enderecoPessoaRepository.saveAll(Arrays.asList(ep1, ep2, ep3, ep4));
         
         Publicador pub1 = new Publicador(null, true, new Date(), new Date(), 
                 p1, congregacao);

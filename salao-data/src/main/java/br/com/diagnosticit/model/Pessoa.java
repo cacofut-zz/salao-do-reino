@@ -26,7 +26,7 @@ public class Pessoa extends BaseEntity{
     private String sobrenome;
     
     @OneToMany(mappedBy = "pessoa")
-    private List<Endereco> enderecos = new ArrayList<>();
+    private List<EnderecoPessoa> enderecos = new ArrayList<>();
 
     public Pessoa() {
         
@@ -61,13 +61,13 @@ public class Pessoa extends BaseEntity{
         this.sobrenome = sobrenome;
     }
 
-    public List<Endereco> getEnderecos() {
+    public List<EnderecoPessoa> getEnderecos() {
         return enderecos;
     }
 
-    public void setEnderecos(List<Endereco> enderecos) {
+    public void setEnderecos(List<EnderecoPessoa> enderecos) {
         this.enderecos = enderecos;
-    }        
+    }   
 
     @Override
     public String toString() {
