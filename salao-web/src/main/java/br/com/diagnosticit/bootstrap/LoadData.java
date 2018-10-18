@@ -38,6 +38,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import br.com.diagnosticit.repositories.EstadoJPARepository;
+import br.com.diagnosticit.repositories.PrivilegioRepository;
 
 /**
  *
@@ -84,6 +85,9 @@ public class LoadData implements CommandLineRunner{
     
     @Autowired
     private EnderecoPessoaRepository enderecoPessoaRepository;
+    
+    @Autowired
+    private PrivilegioRepository privilegioRepository;
     
     @Override
     public void run(String... args) throws Exception {
@@ -172,27 +176,32 @@ public class LoadData implements CommandLineRunner{
         
         PublicadorNaoBatizado publicadorNB1 = new PublicadorNaoBatizado(null, 
                 "Publicador não Batizado", pub3);
+               
         
-        publicadorBatizadoRepository.saveAll(Arrays.asList(publicadorb1, publicadorb2));
-        
+        publicadorBatizadoRepository.saveAll(Arrays.asList(publicadorb1, publicadorb2));        
         publicadorNaoBatizadoRepository.saveAll(Arrays.asList( publicadorNB1 ));
                 
         
         Pioneiro pioneiro1 = new Pioneiro(null, TipoPioneiro.PIONEIRO_REGULAR,
-                new Date(), new Date(), true, publicadorb1);        
-        pioneiroRepository.save(pioneiro1);              
+            new Date(), new Date(), true, publicadorb1); 
         
         ServoMinisterial servo1 = new ServoMinisterial(null, "Servo", new Date(), 
-                new Date(), true, publicadorb1);
-        servoMinisterialRepository.save(servo1);
+            new Date(), true, publicadorb1);
         
         Pioneiro pioneiro2 = new Pioneiro(null, TipoPioneiro.PIONEIRO_ESPECIAL,
-                new Date(), new Date(), true, publicadorb2);
-        pioneiroRepository.save(pioneiro2);
+            new Date(), new Date(), true, publicadorb2);
         
         Anciao anciao1 = new Anciao(null, "Ancião", new Date(), new Date(), 
-                true, publicadorb2);
-        anciaoRepository.save(anciao1);
+            true, publicadorb2);
+        
+        publicadorb1.getPrivilegios().addAll(Arrays.asList(pioneiro1, servo1));
+        publicadorb2.getPrivilegios().addAll(Arrays.asList(pioneiro2, anciao1));
+        
+        privilegioRepository.saveAll(Arrays.asList(pioneiro1, pioneiro2, servo1, anciao1));
+//        pioneiroRepository.save(pioneiro1); 
+//        pioneiroRepository.save(pioneiro2);
+//        servoMinisterialRepository.save(servo1);                        
+//        anciaoRepository.save(anciao1);
 
          
     }
