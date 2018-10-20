@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import br.com.diagnosticit.repositories.PublicadorNaoBatizadoRepository;
+import java.util.HashSet;
 
 /**
  *
@@ -27,7 +28,9 @@ public class PublicadorNaoBatizadoJPAService implements PublicadorNaoBatizadoSer
     
     @Override
     public Set<PublicadorNaoBatizado> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<PublicadorNaoBatizado> publicadoresNaoBatizado = new HashSet<>();
+        publicadorNaoBatizadoRepository.findAll().forEach(publicadoresNaoBatizado::add);
+        return publicadoresNaoBatizado;
     }
 
     @Override

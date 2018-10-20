@@ -11,8 +11,11 @@ import br.com.diagnosticit.model.PublicadorNaoBatizado;
 import br.com.diagnosticit.repositories.PublicadorBatizadoRepository;
 import br.com.diagnosticit.repositories.PublicadorNaoBatizadoRepository;
 import br.com.diagnosticit.repositories.PublicadorRepository;
+import br.com.diagnosticit.services.PublicadorBatizadoService;
+import br.com.diagnosticit.services.PublicadorNaoBatizadoService;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,24 +31,23 @@ import org.springframework.web.bind.annotation.RestController;
 public class PublicadoresResource {
     
     @Autowired
-    private PublicadorBatizadoRepository publicadorBatizadoRepository;
+    private PublicadorBatizadoService publicadorBatizadoService;
     @Autowired
-    private PublicadorNaoBatizadoRepository publicadorNaoBatizadoRepository;
+    private PublicadorNaoBatizadoService publicadorNaoBatizadoService;
     
     @GetMapping
     public ResponseEntity<List<Object>> findAll(){
         
-        List<PublicadorBatizado> publicadoresBatizados = 
-                publicadorBatizadoRepository.findAll();
+        Set<PublicadorBatizado> publicadoresBatizados = 
+            publicadorBatizadoService.findAll();
         
-        List<PublicadorNaoBatizado> publicadoresNaoBatizado = 
-                publicadorNaoBatizadoRepository.findAll();
+        Set<PublicadorNaoBatizado> publicadoresNaoBatizado = 
+            publicadorNaoBatizadoService.findAll();
         
         ArrayList<Object> publicadores = new ArrayList<>();
         
-        publicadoresBatizados  .forEach( pb   -> publicadores.add(pb));
-        publicadoresNaoBatizado.forEach( pbnb -> publicadores.add(pbnb));
-        
+        publicadoresBatizados  .forEach(publicadores::add);
+        publicadoresNaoBatizado.forEach(publicadores::add);        
         
         return ResponseEntity.ok().body(publicadores);
     }

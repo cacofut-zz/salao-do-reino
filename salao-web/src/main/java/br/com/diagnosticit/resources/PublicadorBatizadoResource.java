@@ -7,7 +7,9 @@ package br.com.diagnosticit.resources;
 
 import br.com.diagnosticit.model.PublicadorBatizado;
 import br.com.diagnosticit.repositories.PublicadorBatizadoRepository;
+import br.com.diagnosticit.services.PublicadorBatizadoService;
 import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,9 +27,12 @@ public class PublicadorBatizadoResource {
     @Autowired
     private PublicadorBatizadoRepository publicadorBatizadoRepository;
     
+    @Autowired
+    private PublicadorBatizadoService publicadorBatizadoService;
+    
     @GetMapping
-    public ResponseEntity<List<PublicadorBatizado>> findAll(){
-        List<PublicadorBatizado> publicadores = publicadorBatizadoRepository.findAll();
+    public ResponseEntity<Set<PublicadorBatizado>> findAll(){
+        Set<PublicadorBatizado> publicadores = publicadorBatizadoService.findAll();
         return ResponseEntity.ok().body(publicadores);
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import br.com.diagnosticit.repositories.PrivilegioRepository;
+import java.util.HashSet;
 
 /**
  *
@@ -27,7 +28,9 @@ public class PrivilegioJPAService implements PrivilegioService{
     
     @Override
     public Set<Privilegio> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<Privilegio> privilegios = new HashSet<>();
+        privilegioRepository.findAll().forEach(privilegios::add);
+        return privilegios;
     }
 
     @Override

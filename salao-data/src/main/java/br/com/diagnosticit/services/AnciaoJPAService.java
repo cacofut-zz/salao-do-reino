@@ -8,6 +8,8 @@ package br.com.diagnosticit.services;
 import br.com.diagnosticit.model.Anciao;
 import br.com.diagnosticit.repositories.AnciaoRepository;
 import br.com.diagnosticit.services.exceptions.ObjectNotFoundException;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +29,9 @@ public class AnciaoJPAService implements AnciaoService{
     
     @Override
     public Set<Anciao> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<Anciao> ancioes = new HashSet<>();
+        anciaoRepository.findAll().forEach( ancioes::add );         
+        return ancioes;
     }
 
     @Override
