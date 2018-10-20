@@ -37,8 +37,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import br.com.diagnosticit.repositories.EstadoJPARepository;
 import br.com.diagnosticit.repositories.PrivilegioRepository;
+import br.com.diagnosticit.repositories.EstadoRepository;
 
 /**
  *
@@ -48,7 +48,7 @@ import br.com.diagnosticit.repositories.PrivilegioRepository;
 public class LoadData implements CommandLineRunner{
 
     @Autowired
-    private EstadoJPARepository estadoRepository;
+    private EstadoRepository estadoRepository;
     
     @Autowired
     private CidadeRepository cidadeRepository;
@@ -67,15 +67,6 @@ public class LoadData implements CommandLineRunner{
     
     @Autowired
     private PublicadorBatizadoRepository publicadorBatizadoRepository;
-    
-    @Autowired
-    private PioneiroRepository pioneiroRepository;
-    
-    @Autowired
-    private ServoMinisterialRepository servoMinisterialRepository;
-    
-    @Autowired
-    private AnciaoRepository anciaoRepository;
     
     @Autowired
     private PublicadorRepository publicadorRepository;
@@ -198,10 +189,7 @@ public class LoadData implements CommandLineRunner{
         publicadorb2.getPrivilegios().addAll(Arrays.asList(pioneiro2, anciao1));
         
         privilegioRepository.saveAll(Arrays.asList(pioneiro1, pioneiro2, servo1, anciao1));
-//        pioneiroRepository.save(pioneiro1); 
-//        pioneiroRepository.save(pioneiro2);
-//        servoMinisterialRepository.save(servo1);                        
-//        anciaoRepository.save(anciao1);
+
 
          
     }

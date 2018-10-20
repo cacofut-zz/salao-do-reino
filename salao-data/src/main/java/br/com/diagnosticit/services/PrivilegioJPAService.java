@@ -5,14 +5,14 @@
  */
 package br.com.diagnosticit.services;
 
-import br.com.diagnosticit.model.Estado;
-import br.com.diagnosticit.repositories.EstadoJPARepository;
+import br.com.diagnosticit.model.Privilegio;
 import br.com.diagnosticit.services.exceptions.ObjectNotFoundException;
 import java.util.Optional;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
+import br.com.diagnosticit.repositories.PrivilegioRepository;
 
 /**
  *
@@ -20,30 +20,30 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Profile("springdatajpa")
-public class EstadoJPAServiceImpl implements EstadoService{
+public class PrivilegioJPAService implements PrivilegioService{
 
     @Autowired    
-    private EstadoJPARepository estadoRepository;
+    private PrivilegioRepository privilegioRepository;
     
     @Override
-    public Set<Estado> findAll() {
+    public Set<Privilegio> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Estado findById(Long id) {
-        Optional<Estado> obejct = estadoRepository.findById(id);
+    public Privilegio findById(Long id) {
+        Optional<Privilegio> obejct = privilegioRepository.findById(id);
         return obejct.orElseThrow( () -> new ObjectNotFoundException("Objeto não encontrado! Id: " 
-                + id + ", Tipo: " + Estado.class.getName()) );
+                + id + ", Tipo: " + Privilegio.class.getName()) );
     }
 
     @Override
-    public Estado save(Estado object) {
+    public Privilegio save(Privilegio object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(Estado object) {
+    public void delete(Privilegio object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
