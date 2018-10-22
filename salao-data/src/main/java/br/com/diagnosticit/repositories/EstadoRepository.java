@@ -14,6 +14,6 @@ import org.springframework.stereotype.Repository;
  * @author cristianoca
  */
 @Repository
-public interface EstadoJPARepository extends JpaRepository<Estado, Long>{
+public interface EstadoRepository extends JpaRepository<Estado, Long>{
     
 }

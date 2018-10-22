@@ -21,13 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/congregacoes")
 public class CongregacaoResource {
-//    
-//    @Autowired
-//    private CongregacaoRepository congregacaoRepository;
-//    
-//    @GetMapping
-//    public ResponseEntity<List<Congregacao>> findAll(){
-//        List<Congregacao> congregacoes = congregacaoRepository.findAll();
-//        return ResponseEntity.ok().body(congregacoes);
-//    }
+
+    
 }

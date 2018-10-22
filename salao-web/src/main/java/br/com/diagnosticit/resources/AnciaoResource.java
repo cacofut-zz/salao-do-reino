@@ -7,7 +7,9 @@ package br.com.diagnosticit.resources;
 
 import br.com.diagnosticit.model.Anciao;
 import br.com.diagnosticit.repositories.AnciaoRepository;
+import br.com.diagnosticit.services.AnciaoService;
 import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,11 +25,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class AnciaoResource {
     
     @Autowired
-    private AnciaoRepository anciaoRepository;
-    
+    private AnciaoService anciaoService;
+        
     @GetMapping
-    public ResponseEntity<List<Anciao>> listAll(){
-        List<Anciao> ancioes = anciaoRepository.findAll();
+    public ResponseEntity<Set<Anciao>> listAll(){
+        Set<Anciao> ancioes = anciaoService.findAll();
         return ResponseEntity.ok().body(ancioes);
         
     }

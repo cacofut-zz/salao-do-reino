@@ -11,6 +11,7 @@ import br.com.diagnosticit.model.Bairro;
 import br.com.diagnosticit.model.Cidade;
 import br.com.diagnosticit.model.Congregacao;
 import br.com.diagnosticit.model.Endereco;
+import br.com.diagnosticit.model.EnderecoPessoa;
 import br.com.diagnosticit.model.Estado;
 import br.com.diagnosticit.model.Pessoa;
 import br.com.diagnosticit.model.Pioneiro;
@@ -22,6 +23,7 @@ import br.com.diagnosticit.repositories.AnciaoRepository;
 import br.com.diagnosticit.repositories.BairroRepository;
 import br.com.diagnosticit.repositories.CidadeRepository;
 import br.com.diagnosticit.repositories.CongregacaoRepository;
+import br.com.diagnosticit.repositories.EnderecoPessoaRepository;
 import br.com.diagnosticit.repositories.EnderecoRepository;
 import br.com.diagnosticit.repositories.PessoaRepository;
 import br.com.diagnosticit.repositories.PioneiroRepository;
@@ -35,7 +37,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import br.com.diagnosticit.repositories.EstadoJPARepository;
+import br.com.diagnosticit.repositories.PrivilegioRepository;
+import br.com.diagnosticit.repositories.EstadoRepository;
 
 /**
  *
@@ -45,7 +48,7 @@ import br.com.diagnosticit.repositories.EstadoJPARepository;
 public class LoadData implements CommandLineRunner{
 
     @Autowired
-    private EstadoJPARepository estadoRepository;
+    private EstadoRepository estadoRepository;
     
     @Autowired
     private CidadeRepository cidadeRepository;
@@ -66,19 +69,16 @@ public class LoadData implements CommandLineRunner{
     private PublicadorBatizadoRepository publicadorBatizadoRepository;
     
     @Autowired
-    private PioneiroRepository pioneiroRepository;
-    
-    @Autowired
-    private ServoMinisterialRepository servoMinisterialRepository;
-    
-    @Autowired
-    private AnciaoRepository anciaoRepository;
-    
-    @Autowired
     private PublicadorRepository publicadorRepository;
     
     @Autowired
     private PublicadorNaoBatizadoRepository publicadorNaoBatizadoRepository;
+    
+    @Autowired
+    private EnderecoPessoaRepository enderecoPessoaRepository;
+    
+    @Autowired
+    private PrivilegioRepository privilegioRepository;
     
     @Override
     public void run(String... args) throws Exception {
@@ -139,20 +139,16 @@ public class LoadData implements CommandLineRunner{
         Pessoa p1 = new Pessoa("cristiano", "carvalho amaral");        
         Pessoa p2 = new Pessoa("Junior", "Menezes");
         Pessoa p3 = new Pessoa("Luca", "Silva");
-
-        p1.getEnderecos().addAll(Arrays.asList(endereco1, endereco2));
-        endereco1.setPessoa(p1);
-        endereco2.setPessoa(p1);
         
-        p2.getEnderecos().add(endereco3);
-        endereco3.setPessoa(p2);
-        
-        p3.getEnderecos().add(endereco5);
-        endereco5.setPessoa(p3);
+        EnderecoPessoa ep1 = new EnderecoPessoa(null, p1, endereco1);
+        EnderecoPessoa ep2 = new EnderecoPessoa(null, p1, endereco2);
+        EnderecoPessoa ep3 = new EnderecoPessoa(null, p2, endereco3);
+        EnderecoPessoa ep4 = new EnderecoPessoa(null, p3, endereco4);
         
         pessoaRepository  .saveAll(Arrays.asList( p1, p2, p3 ));
         enderecoRepository.saveAll(Arrays.asList(endereco1, endereco2, 
-                endereco3, endereco4, endereco5));
+            endereco3, endereco4, endereco5));      
+        enderecoPessoaRepository.saveAll(Arrays.asList(ep1, ep2, ep3, ep4));
         
         Publicador pub1 = new Publicador(null, true, new Date(), new Date(), 
                 p1, congregacao);
@@ -171,27 +167,29 @@ public class LoadData implements CommandLineRunner{
         
         PublicadorNaoBatizado publicadorNB1 = new PublicadorNaoBatizado(null, 
                 "Publicador não Batizado", pub3);
+               
         
-        publicadorBatizadoRepository.saveAll(Arrays.asList(publicadorb1, publicadorb2));
-        
+        publicadorBatizadoRepository.saveAll(Arrays.asList(publicadorb1, publicadorb2));        
         publicadorNaoBatizadoRepository.saveAll(Arrays.asList( publicadorNB1 ));
                 
         
         Pioneiro pioneiro1 = new Pioneiro(null, TipoPioneiro.PIONEIRO_REGULAR,
-                new Date(), new Date(), true, publicadorb1);        
-        pioneiroRepository.save(pioneiro1);              
+            new Date(), new Date(), true, publicadorb1); 
         
         ServoMinisterial servo1 = new ServoMinisterial(null, "Servo", new Date(), 
-                new Date(), true, publicadorb1);
-        servoMinisterialRepository.save(servo1);
+            new Date(), true, publicadorb1);
         
         Pioneiro pioneiro2 = new Pioneiro(null, TipoPioneiro.PIONEIRO_ESPECIAL,
-                new Date(), new Date(), true, publicadorb2);
-        pioneiroRepository.save(pioneiro2);
+            new Date(), new Date(), true, publicadorb2);
         
         Anciao anciao1 = new Anciao(null, "Ancião", new Date(), new Date(), 
-                true, publicadorb2);
-        anciaoRepository.save(anciao1);
+            true, publicadorb2);
+        
+        publicadorb1.getPrivilegios().addAll(Arrays.asList(pioneiro1, servo1));
+        publicadorb2.getPrivilegios().addAll(Arrays.asList(pioneiro2, anciao1));
+        
+        privilegioRepository.saveAll(Arrays.asList(pioneiro1, pioneiro2, servo1, anciao1));
+
 
          
     }

@@ -5,45 +5,46 @@
  */
 package br.com.diagnosticit.services;
 
-import br.com.diagnosticit.model.Estado;
-import br.com.diagnosticit.repositories.EstadoJPARepository;
+import br.com.diagnosticit.model.Congregacao;
+import br.com.diagnosticit.repositories.CongregacaoRepository;
 import br.com.diagnosticit.services.exceptions.ObjectNotFoundException;
 import java.util.Optional;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
+import br.com.diagnosticit.repositories.EstadoRepository;
 
 /**
  *
  * @author cristiano
  */
 @Service
-//@Profile("springdatajpa")
-public class EstadoSDJPAService implements EstadoService{
+@Profile("springdatajpa")
+public class CongregacaoJPAService implements CongregacaoService{
 
     @Autowired    
-    private EstadoJPARepository estadoRepository;
+    private CongregacaoRepository congregacaoRepository;
     
     @Override
-    public Set<Estado> findAll() {
+    public Set<Congregacao> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Estado findById(Long id) {
-        Optional<Estado> obejct = estadoRepository.findById(id);
+    public Congregacao findById(Long id) {
+        Optional<Congregacao> obejct = congregacaoRepository.findById(id);
         return obejct.orElseThrow( () -> new ObjectNotFoundException("Objeto não encontrado! Id: " 
-                + id + ", Tipo: " + Estado.class.getName()) );
+                + id + ", Tipo: " + Congregacao.class.getName()) );
     }
 
     @Override
-    public Estado save(Estado object) {
+    public Congregacao save(Congregacao object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(Estado object) {
+    public void delete(Congregacao object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
