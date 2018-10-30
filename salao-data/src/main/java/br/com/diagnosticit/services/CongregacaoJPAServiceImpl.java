@@ -5,14 +5,15 @@
  */
 package br.com.diagnosticit.services;
 
-import br.com.diagnosticit.model.Publicador;
+import br.com.diagnosticit.model.Congregacao;
+import br.com.diagnosticit.repositories.CongregacaoRepository;
 import br.com.diagnosticit.services.exceptions.ObjectNotFoundException;
 import java.util.Optional;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
-import br.com.diagnosticit.repositories.PublicadorRepository;
+import br.com.diagnosticit.repositories.EstadoRepository;
 
 /**
  *
@@ -20,30 +21,30 @@ import br.com.diagnosticit.repositories.PublicadorRepository;
  */
 @Service
 @Profile("springdatajpa")
-public class PublicadorJPAService implements PublicadorService{
+public class CongregacaoJPAServiceImpl implements CongregacaoService{
 
     @Autowired    
-    private PublicadorRepository publicadorRepository;
+    private CongregacaoRepository congregacaoRepository;
     
     @Override
-    public Set<Publicador> findAll() {
+    public Set<Congregacao> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Publicador findById(Long id) {
-        Optional<Publicador> obejct = publicadorRepository.findById(id);
+    public Congregacao findById(Long id) {
+        Optional<Congregacao> obejct = congregacaoRepository.findById(id);
         return obejct.orElseThrow( () -> new ObjectNotFoundException("Objeto não encontrado! Id: " 
-                + id + ", Tipo: " + Publicador.class.getName()) );
+                + id + ", Tipo: " + Congregacao.class.getName()) );
     }
 
     @Override
-    public Publicador save(Publicador object) {
+    public Congregacao save(Congregacao object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(Publicador object) {
+    public void delete(Congregacao object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -5,15 +5,14 @@
  */
 package br.com.diagnosticit.services;
 
-import br.com.diagnosticit.model.Privilegio;
+import br.com.diagnosticit.model.Bairro;
 import br.com.diagnosticit.services.exceptions.ObjectNotFoundException;
 import java.util.Optional;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
-import br.com.diagnosticit.repositories.PrivilegioRepository;
-import java.util.HashSet;
+import br.com.diagnosticit.repositories.BairroRepository;
 
 /**
  *
@@ -21,32 +20,30 @@ import java.util.HashSet;
  */
 @Service
 @Profile("springdatajpa")
-public class PrivilegioJPAService implements PrivilegioService{
+public class BairroJPAServiceImpl implements BairroService{
 
     @Autowired    
-    private PrivilegioRepository privilegioRepository;
+    private BairroRepository bairroRepository;
     
     @Override
-    public Set<Privilegio> findAll() {
-        Set<Privilegio> privilegios = new HashSet<>();
-        privilegioRepository.findAll().forEach(privilegios::add);
-        return privilegios;
-    }
-
-    @Override
-    public Privilegio findById(Long id) {
-        Optional<Privilegio> obejct = privilegioRepository.findById(id);
-        return obejct.orElseThrow( () -> new ObjectNotFoundException("Objeto não encontrado! Id: " 
-                + id + ", Tipo: " + Privilegio.class.getName()) );
-    }
-
-    @Override
-    public Privilegio save(Privilegio object) {
+    public Set<Bairro> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(Privilegio object) {
+    public Bairro findById(Long id) {
+        Optional<Bairro> obejct = bairroRepository.findById(id);
+        return obejct.orElseThrow( () -> new ObjectNotFoundException("Objeto não encontrado! Id: " 
+                + id + ", Tipo: " + Bairro.class.getName()) );
+    }
+
+    @Override
+    public Bairro save(Bairro object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void delete(Bairro object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

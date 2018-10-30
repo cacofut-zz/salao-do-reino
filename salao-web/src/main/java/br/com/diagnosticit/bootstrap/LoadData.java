@@ -86,9 +86,8 @@ public class LoadData implements CommandLineRunner{
         Estado estado1 = new Estado("são paulo", "sp");        
         Estado estado2 = new Estado("rio de janeiro", "rj");
         
-        estadoRepository.save(estado1);
-        estadoRepository.save(estado2); 
-        
+        estadoRepository.saveAll(Arrays.asList(estado1, estado2));
+                
         Cidade cidade1 = new Cidade("são paulo", estado1);
         cidade1.setEstado(estado1);
         

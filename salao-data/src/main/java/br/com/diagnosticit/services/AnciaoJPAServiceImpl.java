@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Profile("springdatajpa")
-public class AnciaoJPAService implements AnciaoService{
+public class AnciaoJPAServiceImpl implements AnciaoService{
 
     @Autowired    
     private AnciaoRepository anciaoRepository;

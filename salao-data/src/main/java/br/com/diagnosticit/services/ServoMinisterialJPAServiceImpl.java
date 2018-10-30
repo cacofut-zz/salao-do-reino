@@ -5,14 +5,14 @@
  */
 package br.com.diagnosticit.services;
 
-import br.com.diagnosticit.model.Endereco;
+import br.com.diagnosticit.model.ServoMinisterial;
 import br.com.diagnosticit.services.exceptions.ObjectNotFoundException;
 import java.util.Optional;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
-import br.com.diagnosticit.repositories.EnderecoRepository;
+import br.com.diagnosticit.repositories.ServoMinisterialRepository;
 
 /**
  *
@@ -20,30 +20,30 @@ import br.com.diagnosticit.repositories.EnderecoRepository;
  */
 @Service
 @Profile("springdatajpa")
-public class EnderecoJPAService implements EnderecoService{
+public class ServoMinisterialJPAServiceImpl implements ServoMinisterialService{
 
     @Autowired    
-    private EnderecoRepository enderecoRepository;
+    private ServoMinisterialRepository servoMinisterialRepository;
     
     @Override
-    public Set<Endereco> findAll() {
+    public Set<ServoMinisterial> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Endereco findById(Long id) {
-        Optional<Endereco> obejct = enderecoRepository.findById(id);
+    public ServoMinisterial findById(Long id) {
+        Optional<ServoMinisterial> obejct = servoMinisterialRepository.findById(id);
         return obejct.orElseThrow( () -> new ObjectNotFoundException("Objeto não encontrado! Id: " 
-                + id + ", Tipo: " + Endereco.class.getName()) );
+                + id + ", Tipo: " + ServoMinisterial.class.getName()) );
     }
 
     @Override
-    public Endereco save(Endereco object) {
+    public ServoMinisterial save(ServoMinisterial object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(Endereco object) {
+    public void delete(ServoMinisterial object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

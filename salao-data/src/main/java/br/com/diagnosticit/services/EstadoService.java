@@ -6,8 +6,9 @@
 package br.com.diagnosticit.services;
 
 import br.com.diagnosticit.model.Estado;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Set;
+
 
 /**
  *
@@ -15,4 +16,6 @@ import org.springframework.stereotype.Service;
  */
 public interface EstadoService extends CrudService<Estado, Long>{
 
+    public List<Estado> getEstados();
+    //public Set<Estado> getEstados();
 }

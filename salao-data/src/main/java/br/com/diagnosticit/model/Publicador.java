@@ -5,9 +5,12 @@
  */
 package br.com.diagnosticit.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -26,6 +29,9 @@ public class Publicador extends BaseEntity{
     
     @OneToOne
     private Congregacao congregacao;
+    
+    @OneToMany(mappedBy = "publicador")
+    private List<Servico> servicos = new ArrayList<>();
 
     public Publicador() {
     }
@@ -78,6 +84,14 @@ public class Publicador extends BaseEntity{
 
     public void setDataFinal(Date dataFinal) {
         this.dataFinal = dataFinal;
+    }
+
+    public List<Servico> getServicos() {
+        return servicos;
+    }
+
+    public void setServicos(List<Servico> servicos) {
+        this.servicos = servicos;
     }
     
     

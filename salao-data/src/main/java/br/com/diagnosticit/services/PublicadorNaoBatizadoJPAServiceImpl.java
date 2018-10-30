@@ -5,14 +5,15 @@
  */
 package br.com.diagnosticit.services;
 
-import br.com.diagnosticit.model.Pessoa;
+import br.com.diagnosticit.model.PublicadorNaoBatizado;
 import br.com.diagnosticit.services.exceptions.ObjectNotFoundException;
 import java.util.Optional;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
-import br.com.diagnosticit.repositories.PessoaRepository;
+import br.com.diagnosticit.repositories.PublicadorNaoBatizadoRepository;
+import java.util.HashSet;
 
 /**
  *
@@ -20,30 +21,32 @@ import br.com.diagnosticit.repositories.PessoaRepository;
  */
 @Service
 @Profile("springdatajpa")
-public class PessoaJPAService implements PessoaService{
+public class PublicadorNaoBatizadoJPAServiceImpl implements PublicadorNaoBatizadoService{
 
     @Autowired    
-    private PessoaRepository pessoaRepository;
+    private PublicadorNaoBatizadoRepository publicadorNaoBatizadoRepository;
     
     @Override
-    public Set<Pessoa> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Set<PublicadorNaoBatizado> findAll() {
+        Set<PublicadorNaoBatizado> publicadoresNaoBatizado = new HashSet<>();
+        publicadorNaoBatizadoRepository.findAll().forEach(publicadoresNaoBatizado::add);
+        return publicadoresNaoBatizado;
     }
 
     @Override
-    public Pessoa findById(Long id) {
-        Optional<Pessoa> obejct = pessoaRepository.findById(id);
+    public PublicadorNaoBatizado findById(Long id) {
+        Optional<PublicadorNaoBatizado> obejct = publicadorNaoBatizadoRepository.findById(id);
         return obejct.orElseThrow( () -> new ObjectNotFoundException("Objeto não encontrado! Id: " 
-                + id + ", Tipo: " + Pessoa.class.getName()) );
+                + id + ", Tipo: " + PublicadorNaoBatizado.class.getName()) );
     }
 
     @Override
-    public Pessoa save(Pessoa object) {
+    public PublicadorNaoBatizado save(PublicadorNaoBatizado object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(Pessoa object) {
+    public void delete(PublicadorNaoBatizado object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

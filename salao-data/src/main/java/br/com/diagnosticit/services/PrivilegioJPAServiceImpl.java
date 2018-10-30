@@ -5,14 +5,15 @@
  */
 package br.com.diagnosticit.services;
 
-import br.com.diagnosticit.model.EnderecoPessoa;
+import br.com.diagnosticit.model.Privilegio;
 import br.com.diagnosticit.services.exceptions.ObjectNotFoundException;
 import java.util.Optional;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
-import br.com.diagnosticit.repositories.EnderecoPessoaRepository;
+import br.com.diagnosticit.repositories.PrivilegioRepository;
+import java.util.HashSet;
 
 /**
  *
@@ -20,30 +21,32 @@ import br.com.diagnosticit.repositories.EnderecoPessoaRepository;
  */
 @Service
 @Profile("springdatajpa")
-public class EnderecoPessoaJPAService implements EnderecoPessoaService{
+public class PrivilegioJPAServiceImpl implements PrivilegioService{
 
     @Autowired    
-    private EnderecoPessoaRepository enderecoPessoaRepository;
+    private PrivilegioRepository privilegioRepository;
     
     @Override
-    public Set<EnderecoPessoa> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Set<Privilegio> findAll() {
+        Set<Privilegio> privilegios = new HashSet<>();
+        privilegioRepository.findAll().forEach(privilegios::add);
+        return privilegios;
     }
 
     @Override
-    public EnderecoPessoa findById(Long id) {
-        Optional<EnderecoPessoa> obejct = enderecoPessoaRepository.findById(id);
+    public Privilegio findById(Long id) {
+        Optional<Privilegio> obejct = privilegioRepository.findById(id);
         return obejct.orElseThrow( () -> new ObjectNotFoundException("Objeto não encontrado! Id: " 
-                + id + ", Tipo: " + EnderecoPessoa.class.getName()) );
+                + id + ", Tipo: " + Privilegio.class.getName()) );
     }
 
     @Override
-    public EnderecoPessoa save(EnderecoPessoa object) {
+    public Privilegio save(Privilegio object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(EnderecoPessoa object) {
+    public void delete(Privilegio object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

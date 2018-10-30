@@ -5,15 +5,14 @@
  */
 package br.com.diagnosticit.services;
 
-import br.com.diagnosticit.model.PublicadorNaoBatizado;
+import br.com.diagnosticit.model.EnderecoPessoa;
 import br.com.diagnosticit.services.exceptions.ObjectNotFoundException;
 import java.util.Optional;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
-import br.com.diagnosticit.repositories.PublicadorNaoBatizadoRepository;
-import java.util.HashSet;
+import br.com.diagnosticit.repositories.EnderecoPessoaRepository;
 
 /**
  *
@@ -21,32 +20,30 @@ import java.util.HashSet;
  */
 @Service
 @Profile("springdatajpa")
-public class PublicadorNaoBatizadoJPAService implements PublicadorNaoBatizadoService{
+public class EnderecoPessoaJPAServiceImpl implements EnderecoPessoaService{
 
     @Autowired    
-    private PublicadorNaoBatizadoRepository publicadorNaoBatizadoRepository;
+    private EnderecoPessoaRepository enderecoPessoaRepository;
     
     @Override
-    public Set<PublicadorNaoBatizado> findAll() {
-        Set<PublicadorNaoBatizado> publicadoresNaoBatizado = new HashSet<>();
-        publicadorNaoBatizadoRepository.findAll().forEach(publicadoresNaoBatizado::add);
-        return publicadoresNaoBatizado;
-    }
-
-    @Override
-    public PublicadorNaoBatizado findById(Long id) {
-        Optional<PublicadorNaoBatizado> obejct = publicadorNaoBatizadoRepository.findById(id);
-        return obejct.orElseThrow( () -> new ObjectNotFoundException("Objeto não encontrado! Id: " 
-                + id + ", Tipo: " + PublicadorNaoBatizado.class.getName()) );
-    }
-
-    @Override
-    public PublicadorNaoBatizado save(PublicadorNaoBatizado object) {
+    public Set<EnderecoPessoa> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(PublicadorNaoBatizado object) {
+    public EnderecoPessoa findById(Long id) {
+        Optional<EnderecoPessoa> obejct = enderecoPessoaRepository.findById(id);
+        return obejct.orElseThrow( () -> new ObjectNotFoundException("Objeto não encontrado! Id: " 
+                + id + ", Tipo: " + EnderecoPessoa.class.getName()) );
+    }
+
+    @Override
+    public EnderecoPessoa save(EnderecoPessoa object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void delete(EnderecoPessoa object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -5,15 +5,14 @@
  */
 package br.com.diagnosticit.services;
 
-import br.com.diagnosticit.model.PublicadorBatizado;
+import br.com.diagnosticit.model.Endereco;
 import br.com.diagnosticit.services.exceptions.ObjectNotFoundException;
 import java.util.Optional;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
-import br.com.diagnosticit.repositories.PublicadorBatizadoRepository;
-import java.util.HashSet;
+import br.com.diagnosticit.repositories.EnderecoRepository;
 
 /**
  *
@@ -21,32 +20,30 @@ import java.util.HashSet;
  */
 @Service
 @Profile("springdatajpa")
-public class PublicadorBatizadoJPAService implements PublicadorBatizadoService{
+public class EnderecoJPAServiceImpl implements EnderecoService{
 
     @Autowired    
-    private PublicadorBatizadoRepository publicadorBatizadoRepository;
+    private EnderecoRepository enderecoRepository;
     
     @Override
-    public Set<PublicadorBatizado> findAll() {
-        Set<PublicadorBatizado> publicadoresBatizados = new HashSet<>();
-        publicadorBatizadoRepository.findAll().forEach(publicadoresBatizados::add);
-        return publicadoresBatizados;
-    }
-
-    @Override
-    public PublicadorBatizado findById(Long id) {
-        Optional<PublicadorBatizado> obejct = publicadorBatizadoRepository.findById(id);
-        return obejct.orElseThrow( () -> new ObjectNotFoundException("Objeto não encontrado! Id: " 
-                + id + ", Tipo: " + PublicadorBatizado.class.getName()) );
-    }
-
-    @Override
-    public PublicadorBatizado save(PublicadorBatizado object) {
+    public Set<Endereco> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(PublicadorBatizado object) {
+    public Endereco findById(Long id) {
+        Optional<Endereco> obejct = enderecoRepository.findById(id);
+        return obejct.orElseThrow( () -> new ObjectNotFoundException("Objeto não encontrado! Id: " 
+                + id + ", Tipo: " + Endereco.class.getName()) );
+    }
+
+    @Override
+    public Endereco save(Endereco object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void delete(Endereco object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

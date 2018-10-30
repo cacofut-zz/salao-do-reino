@@ -5,14 +5,15 @@
  */
 package br.com.diagnosticit.services;
 
-import br.com.diagnosticit.model.Estado;
+import br.com.diagnosticit.model.PublicadorBatizado;
 import br.com.diagnosticit.services.exceptions.ObjectNotFoundException;
 import java.util.Optional;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
-import br.com.diagnosticit.repositories.EstadoRepository;
+import br.com.diagnosticit.repositories.PublicadorBatizadoRepository;
+import java.util.HashSet;
 
 /**
  *
@@ -20,30 +21,32 @@ import br.com.diagnosticit.repositories.EstadoRepository;
  */
 @Service
 @Profile("springdatajpa")
-public class EstadoJPAService implements EstadoService{
+public class PublicadorBatizadoJPAServiceImpl implements PublicadorBatizadoService{
 
     @Autowired    
-    private EstadoRepository estadoRepository;
+    private PublicadorBatizadoRepository publicadorBatizadoRepository;
     
     @Override
-    public Set<Estado> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Set<PublicadorBatizado> findAll() {
+        Set<PublicadorBatizado> publicadoresBatizados = new HashSet<>();
+        publicadorBatizadoRepository.findAll().forEach(publicadoresBatizados::add);
+        return publicadoresBatizados;
     }
 
     @Override
-    public Estado findById(Long id) {
-        Optional<Estado> obejct = estadoRepository.findById(id);
+    public PublicadorBatizado findById(Long id) {
+        Optional<PublicadorBatizado> obejct = publicadorBatizadoRepository.findById(id);
         return obejct.orElseThrow( () -> new ObjectNotFoundException("Objeto não encontrado! Id: " 
-                + id + ", Tipo: " + Estado.class.getName()) );
+                + id + ", Tipo: " + PublicadorBatizado.class.getName()) );
     }
 
     @Override
-    public Estado save(Estado object) {
+    public PublicadorBatizado save(PublicadorBatizado object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(Estado object) {
+    public void delete(PublicadorBatizado object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

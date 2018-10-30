@@ -5,14 +5,14 @@
  */
 package br.com.diagnosticit.services;
 
-import br.com.diagnosticit.model.ServoMinisterial;
+import br.com.diagnosticit.model.Publicador;
 import br.com.diagnosticit.services.exceptions.ObjectNotFoundException;
 import java.util.Optional;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
-import br.com.diagnosticit.repositories.ServoMinisterialRepository;
+import br.com.diagnosticit.repositories.PublicadorRepository;
 
 /**
  *
@@ -20,30 +20,30 @@ import br.com.diagnosticit.repositories.ServoMinisterialRepository;
  */
 @Service
 @Profile("springdatajpa")
-public class ServoMinisterialJPAService implements ServoMinisterialService{
+public class PublicadorJPAServiceImpl implements PublicadorService{
 
     @Autowired    
-    private ServoMinisterialRepository servoMinisterialRepository;
+    private PublicadorRepository publicadorRepository;
     
     @Override
-    public Set<ServoMinisterial> findAll() {
+    public Set<Publicador> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public ServoMinisterial findById(Long id) {
-        Optional<ServoMinisterial> obejct = servoMinisterialRepository.findById(id);
+    public Publicador findById(Long id) {
+        Optional<Publicador> obejct = publicadorRepository.findById(id);
         return obejct.orElseThrow( () -> new ObjectNotFoundException("Objeto não encontrado! Id: " 
-                + id + ", Tipo: " + ServoMinisterial.class.getName()) );
+                + id + ", Tipo: " + Publicador.class.getName()) );
     }
 
     @Override
-    public ServoMinisterial save(ServoMinisterial object) {
+    public Publicador save(Publicador object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(ServoMinisterial object) {
+    public void delete(Publicador object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

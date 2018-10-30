@@ -6,6 +6,7 @@
 package br.com.diagnosticit.repositories;
 
 import br.com.diagnosticit.model.Estado;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +16,9 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface EstadoRepository extends JpaRepository<Estado, Long>{
+   
+    Optional<Estado> findByNome(String nome);
+    
+    Optional<Estado> findBySigla(String sigla);
     
 }
