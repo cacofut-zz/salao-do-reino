@@ -7,7 +7,7 @@ package br.com.diagnosticit.services;
 
 import br.com.diagnosticit.model.Estado;
 import java.util.List;
-import java.util.Set;
+
 
 
 /**
