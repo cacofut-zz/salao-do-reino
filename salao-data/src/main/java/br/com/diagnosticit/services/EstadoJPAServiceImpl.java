@@ -21,7 +21,7 @@ import java.util.List;
  * @author cristiano
  */
 @Service
-@Profile("springdatajpa")
+@Profile("jpa")
 public class EstadoJPAServiceImpl implements EstadoService{
 
     @Autowired    

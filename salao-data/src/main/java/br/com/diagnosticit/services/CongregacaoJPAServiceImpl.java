@@ -20,7 +20,7 @@ import br.com.diagnosticit.repositories.EstadoRepository;
  * @author cristiano
  */
 @Service
-@Profile("springdatajpa")
+@Profile("jpa")
 public class CongregacaoJPAServiceImpl implements CongregacaoService{
 
     @Autowired    

@@ -19,7 +19,7 @@ import br.com.diagnosticit.repositories.BairroRepository;
  * @author cristiano
  */
 @Service
-@Profile("springdatajpa")
+@Profile("jpa")
 public class BairroJPAServiceImpl implements BairroService{
 
     @Autowired    

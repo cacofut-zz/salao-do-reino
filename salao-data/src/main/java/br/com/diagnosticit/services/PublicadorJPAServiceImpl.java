@@ -19,7 +19,7 @@ import br.com.diagnosticit.repositories.PublicadorRepository;
  * @author cristiano
  */
 @Service
-@Profile("springdatajpa")
+@Profile("jpa")
 public class PublicadorJPAServiceImpl implements PublicadorService{
 
     @Autowired    

@@ -19,7 +19,7 @@ import br.com.diagnosticit.repositories.ServoMinisterialRepository;
  * @author cristiano
  */
 @Service
-@Profile("springdatajpa")
+@Profile("jpa")
 public class ServoMinisterialJPAServiceImpl implements ServoMinisterialService{
 
     @Autowired    

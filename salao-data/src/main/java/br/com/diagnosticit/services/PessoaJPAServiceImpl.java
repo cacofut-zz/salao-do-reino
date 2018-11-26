@@ -19,7 +19,7 @@ import br.com.diagnosticit.repositories.PessoaRepository;
  * @author cristiano
  */
 @Service
-@Profile("springdatajpa")
+@Profile("jpa")
 public class PessoaJPAServiceImpl implements PessoaService{
 
     @Autowired    

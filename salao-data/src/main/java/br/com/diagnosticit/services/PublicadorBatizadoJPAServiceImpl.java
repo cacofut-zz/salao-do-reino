@@ -20,7 +20,7 @@ import java.util.HashSet;
  * @author cristiano
  */
 @Service
-@Profile("springdatajpa")
+@Profile("jpa")
 public class PublicadorBatizadoJPAServiceImpl implements PublicadorBatizadoService{
 
     @Autowired    

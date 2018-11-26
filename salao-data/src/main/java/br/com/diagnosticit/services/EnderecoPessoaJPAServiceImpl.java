@@ -19,7 +19,7 @@ import br.com.diagnosticit.repositories.EnderecoPessoaRepository;
  * @author cristiano
  */
 @Service
-@Profile("springdatajpa")
+@Profile("jpa")
 public class EnderecoPessoaJPAServiceImpl implements EnderecoPessoaService{
 
     @Autowired    
