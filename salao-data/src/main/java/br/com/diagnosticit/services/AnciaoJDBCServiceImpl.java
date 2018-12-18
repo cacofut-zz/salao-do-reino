@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import br.com.diagnosticit.repositories.AnciaoJDBCRepository;
+import br.com.diagnosticit.repositories.CrudRepository;
+import java.util.HashSet;
 
 /**
  *
@@ -21,35 +23,36 @@ import br.com.diagnosticit.repositories.AnciaoJDBCRepository;
 public class AnciaoJDBCServiceImpl implements CrudService<Anciao, Long>{
 
     @Autowired
-    private AnciaoJDBCRepository anciaoRepository;
+    private CrudRepository anciaoRepository;
 
     public AnciaoJDBCServiceImpl() {
         
     }
 
-    public AnciaoJDBCServiceImpl(AnciaoJDBCRepository anciaoRepository) {
+    public AnciaoJDBCServiceImpl(CrudRepository anciaoRepository) {
         this.anciaoRepository = anciaoRepository;
     }
     
         
     @Override
     public Set<Anciao> findAll() {
-        throw null;
+        Set list = new HashSet(anciaoRepository.findAll());
+        return list;
     }
 
     @Override
     public Anciao findById(Long id) {
-        throw null;
+        return (Anciao) anciaoRepository.findById(id);
     }
 
     @Override
-    public Anciao save(Anciao object) {
-        throw null;
+    public Anciao save(Anciao anciao) {
+        return (Anciao) anciaoRepository.save(anciao);
     }
 
     @Override
-    public void delete(Anciao object) {
-        
+    public void delete(Anciao anciao) {
+        anciaoRepository.delete(anciao);
     }
 
     @Override

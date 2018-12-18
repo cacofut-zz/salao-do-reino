@@ -74,5 +74,13 @@ public abstract class Privilegio extends BaseEntity{
         this.publicadorBatizado = publicadorBatizado;
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + " Privilegio{" + "dataInicial=" + dataInicial +
+                ", dataFinal=" + dataFinal + ", ativo=" + ativo +
+                ", publicadorBatizado=" + publicadorBatizado + '}';
+    }
+
+    
     
 }

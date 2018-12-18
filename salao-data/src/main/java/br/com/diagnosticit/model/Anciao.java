@@ -36,6 +36,12 @@ public class Anciao extends Privilegio{
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " Anciao{" + "tipo=" + tipo + '}';
+    }
+    
     
     
     
