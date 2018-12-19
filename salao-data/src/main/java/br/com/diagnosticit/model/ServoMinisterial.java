@@ -5,6 +5,7 @@
  */
 package br.com.diagnosticit.model;
 
+import br.com.diagnosticit.exceptions.DataInicialMaiorQueDataFinalException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -24,7 +25,7 @@ public class ServoMinisterial extends Privilegio{
     }
 
     public ServoMinisterial(Long id, String tipo, Date dataInicial, Date dataFinal, 
-            boolean ativo, PublicadorBatizado publicadorBatizado) {
+            boolean ativo, PublicadorBatizado publicadorBatizado) throws DataInicialMaiorQueDataFinalException {
         super(id, dataInicial, dataFinal, ativo, publicadorBatizado);
         this.tipo = tipo;
     }

@@ -6,6 +6,7 @@
 package br.com.diagnosticit.model;
 
 import br.com.diagnosticit.enums.TipoPioneiro;
+import br.com.diagnosticit.exceptions.DataInicialMaiorQueDataFinalException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
@@ -29,7 +30,7 @@ public class Pioneiro extends Privilegio{
     }
 
     public Pioneiro(Long id, TipoPioneiro tipo, Date dataInicial, Date dataFinal, 
-            boolean ativo, PublicadorBatizado publicadorBatizado) {
+            boolean ativo, PublicadorBatizado publicadorBatizado) throws DataInicialMaiorQueDataFinalException {
         super(id, dataInicial, dataFinal, ativo, publicadorBatizado);
         this.tipo = tipo.getCodigo();
     }        

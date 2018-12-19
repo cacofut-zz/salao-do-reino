@@ -5,13 +5,13 @@
  */
 package br.com.diagnosticit.model;
 
+import br.com.diagnosticit.exceptions.DataInicialMaiorQueDataFinalException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
 
 /**
  *
@@ -20,7 +20,6 @@ import javax.persistence.MappedSuperclass;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Privilegio extends BaseEntity{
-
     
     private Date dataInicial;
     private Date dataFinal;
@@ -30,15 +29,36 @@ public abstract class Privilegio extends BaseEntity{
     @ManyToOne
     private PublicadorBatizado publicadorBatizado;
 
-    public Privilegio() {
+    public Privilegio() {}
+    
+    public Privilegio(Date dataInicial, Date dataFinal, boolean ativo, 
+            PublicadorBatizado publicadorBatizado) 
+            throws DataInicialMaiorQueDataFinalException {       
+        this(null, dataInicial, dataFinal, ativo, publicadorBatizado);
     }
 
     public Privilegio(Long id, Date dataInicial, Date dataFinal, boolean ativo, 
-            PublicadorBatizado publicadorBatizado) {
-        super(id);
+            PublicadorBatizado publicadorBatizado) 
+            throws DataInicialMaiorQueDataFinalException {
+        super(id);        
+        
+        if( dataInicial == null ){
+            throw new IllegalArgumentException();
+        }        
+        if( dataFinal == null ){
+            throw new IllegalArgumentException();
+        }
+        if( publicadorBatizado == null ){
+            throw new IllegalArgumentException();
+        }
+        if( dataInicial.getTime() > dataFinal.getTime() ){
+            throw new DataInicialMaiorQueDataFinalException(
+                "Data inicial deve ser menor que a data final");
+        }
+                
         this.dataInicial = dataInicial;
-        this.dataFinal = dataFinal;
-        this.ativo = ativo;
+        this.dataFinal   = dataFinal;
+        this.ativo       = ativo;
         this.publicadorBatizado = publicadorBatizado;
     }
        

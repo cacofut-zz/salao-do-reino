@@ -31,8 +31,7 @@ public class BaseEntity implements Serializable {
     public BaseEntity(Long id) {
         this.id = id;
     }
-        
-        
+                
     public Long getId() {
         return id;
     }
