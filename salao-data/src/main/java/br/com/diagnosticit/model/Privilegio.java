@@ -51,7 +51,7 @@ public abstract class Privilegio extends BaseEntity{
         if( publicadorBatizado == null ){
             throw new IllegalArgumentException();
         }
-        if( dataInicial.getTime() > dataFinal.getTime() ){
+        if( dataInicial.getTime() >= dataFinal.getTime() ){
             throw new DataInicialMaiorQueDataFinalException(
                 "Data inicial deve ser menor que a data final");
         }
@@ -66,16 +66,63 @@ public abstract class Privilegio extends BaseEntity{
         return dataInicial;
     }
 
-    public void setDataInicial(Date dataInicial) {
-        this.dataInicial = dataInicial;
+    /**
+     * 
+     * @param dataInicial
+     * @throws DataInicialMaiorQueDataFinalException 
+     */
+    public void setDataInicial(Date dataInicial) throws 
+            DataInicialMaiorQueDataFinalException {
+
+        if( dataInicial == null ){
+            throw new IllegalArgumentException("Data inicial obrigatorio");
+        }
+        if( dataFinal == null ){
+            this.dataInicial = dataInicial;
+        }
+        else{
+            if( dataInicial.getTime() >= dataFinal.getTime() ){
+                throw new DataInicialMaiorQueDataFinalException(
+                "Data inicial deve ser menor que a data final");
+            }
+            else{
+                this.dataInicial = dataInicial;
+            }
+        }
     }
 
+    /**
+     * 
+     * @return 
+     */
     public Date getDataFinal() {
         return dataFinal;
     }
 
-    public void setDataFinal(Date dataFinal) {
-        this.dataFinal = dataFinal;
+    /**
+     * 
+     * @param dataFinal
+     * @throws DataInicialMaiorQueDataFinalException 
+     */
+    public void setDataFinal(Date dataFinal) throws 
+            DataInicialMaiorQueDataFinalException {
+        
+        if( dataFinal == null ){
+            throw new IllegalArgumentException("Data final obrigatorio");
+        }
+        
+        if( dataInicial == null ){
+            this.dataFinal = dataFinal;           
+        }
+        else{
+            if( dataFinal.getTime() <= dataInicial.getTime() ){
+                throw new DataInicialMaiorQueDataFinalException(
+                    "Data inicial deve ser menor que a data final");
+            }
+            else{
+                this.dataFinal = dataFinal;
+            }
+        }        
     }
 
     public boolean isAtivo() {
@@ -90,7 +137,14 @@ public abstract class Privilegio extends BaseEntity{
         return publicadorBatizado;
     }
 
+    /**
+     * 
+     * @param publicadorBatizado 
+     */
     public void setPublicadorBatizado(PublicadorBatizado publicadorBatizado) {
+        if( publicadorBatizado == null ){
+            throw new IllegalArgumentException("Publicador batizado obrigatório");
+        }
         this.publicadorBatizado = publicadorBatizado;
     }
 

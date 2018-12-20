@@ -5,6 +5,7 @@
  */
 package br.com.diagnosticit.model;
 
+import br.com.diagnosticit.exceptions.DataInicialMaiorQueDataFinalException;
 import java.util.Date;
 import javax.persistence.Entity;
 
@@ -21,7 +22,8 @@ public class Anciao extends Privilegio{
     }
 
     public Anciao(Long id, String tipo, Date dataInicial, Date dataFinal, 
-            boolean ativo, PublicadorBatizado publicadorBatizado) {
+            boolean ativo, PublicadorBatizado publicadorBatizado) 
+            throws DataInicialMaiorQueDataFinalException {
         super(id, dataInicial, dataFinal, ativo, publicadorBatizado);
         this.tipo = tipo;
     }
